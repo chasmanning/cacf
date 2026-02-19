@@ -1,0 +1,63 @@
+.multi-month-view {
+  animation: fadeIn 0.3s ease;
+}
+
+.multi-month-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid #d1ccc5;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.nav-btn:hover:not(:disabled) {
+  background: var(--crimson);
+  border-color: var(--crimson);
+  color: #fff;
+}
+
+.nav-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.nav-label {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--crimson);
+  min-width: 240px;
+  text-align: center;
+}
+
+.multi-month-grid {
+  display: grid;
+  gap: 20px;
+}
+
+.multi-month-grid.cols-1 {
+  grid-template-columns: 1fr;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.multi-month-grid.cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.multi-month-grid.cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}

@@ -4,6 +4,7 @@ import { isMonthLevel } from './utils';
 import Header from './components/Header';
 import FilterBar from './components/FilterBar';
 import YearGrid from './components/YearGrid';
+import MultiMonthView from './components/MultiMonthView';
 import MonthDetail from './components/MonthDetail';
 import ListView from './components/ListView';
 import EventModal from './components/EventModal';
@@ -17,6 +18,7 @@ function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [view, setView] = useState('year');
   const [selectedMonth, setSelectedMonth] = useState(null);
+  const [startMonth, setStartMonth] = useState(0);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [hoveredEvent, setHoveredEvent] = useState(null);
 
@@ -61,13 +63,24 @@ function App() {
 
   const handleMonthClick = (month) => {
     setSelectedMonth(month);
-    setView('month');
+    setView('detail');
   };
 
   const handleBackToYear = () => {
     setView('year');
     setSelectedMonth(null);
   };
+
+  const handleViewChange = (newView) => {
+    setView(newView);
+    setSelectedMonth(null);
+    if (newView === '1mo' || newView === '2mo' || newView === '3mo') {
+      setStartMonth(0);
+    }
+  };
+
+  const isMultiMonth = view === '1mo' || view === '2mo' || view === '3mo';
+  const monthCount = view === '1mo' ? 1 : view === '2mo' ? 2 : view === '3mo' ? 3 : 0;
 
   return (
     <div className="app">
@@ -98,14 +111,32 @@ function App() {
           </div>
           <div className="view-toggles">
             <button
+              className={view === '1mo' ? 'active' : ''}
+              onClick={() => handleViewChange('1mo')}
+            >
+              1 Mo
+            </button>
+            <button
+              className={view === '2mo' ? 'active' : ''}
+              onClick={() => handleViewChange('2mo')}
+            >
+              2 Mo
+            </button>
+            <button
+              className={view === '3mo' ? 'active' : ''}
+              onClick={() => handleViewChange('3mo')}
+            >
+              3 Mo
+            </button>
+            <button
               className={view === 'year' ? 'active' : ''}
-              onClick={handleBackToYear}
+              onClick={() => handleViewChange('year')}
             >
               Year
             </button>
             <button
               className={view === 'list' ? 'active' : ''}
-              onClick={() => setView('list')}
+              onClick={() => handleViewChange('list')}
             >
               List
             </button>
@@ -125,7 +156,22 @@ function App() {
             searchQuery={searchQuery}
           />
         )}
-        {view === 'month' && selectedMonth !== null && (
+        {isMultiMonth && (
+          <MultiMonthView
+            year={2026}
+            count={monthCount}
+            startMonth={startMonth}
+            onStartMonthChange={setStartMonth}
+            events={calendarEvents}
+            monthNotes={monthNotes}
+            onMonthClick={handleMonthClick}
+            onEventClick={setSelectedEvent}
+            hoveredEvent={hoveredEvent}
+            onEventHover={setHoveredEvent}
+            searchQuery={searchQuery}
+          />
+        )}
+        {view === 'detail' && selectedMonth !== null && (
           <MonthDetail
             year={2026}
             month={selectedMonth}
