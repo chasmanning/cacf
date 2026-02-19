@@ -6,7 +6,7 @@ import './MultiMonthView.css';
 function MultiMonthView({
   year, count, startMonth, onStartMonthChange,
   events, monthNotes, onMonthClick, onEventClick,
-  hoveredEvent, onEventHover, searchQuery
+  hoveredEvent, onEventHover, searchQuery, onBackToYear
 }) {
   const months = [];
   for (let i = 0; i < count; i++) {
@@ -17,11 +17,11 @@ function MultiMonthView({
   const canGoForward = startMonth + count <= 11;
 
   const handlePrev = () => {
-    if (canGoBack) onStartMonthChange(Math.max(0, startMonth - count));
+    if (canGoBack) onStartMonthChange(startMonth - 1);
   };
 
   const handleNext = () => {
-    if (canGoForward) onStartMonthChange(Math.min(12 - count, startMonth + count));
+    if (canGoForward) onStartMonthChange(startMonth + 1);
   };
 
   const rangeLabel = count === 1
@@ -31,25 +31,33 @@ function MultiMonthView({
   return (
     <div className="multi-month-view">
       <div className="multi-month-nav">
-        <button
-          className="nav-btn"
-          onClick={handlePrev}
-          disabled={!canGoBack}
-        >
-          <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
+        <button className="year-back-btn" onClick={onBackToYear}>
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
             <path d="M10 12L6 8L10 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
+          Year
         </button>
-        <span className="nav-label">{rangeLabel} {year}</span>
-        <button
-          className="nav-btn"
-          onClick={handleNext}
-          disabled={!canGoForward}
-        >
-          <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
-            <path d="M6 4L10 8L6 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </button>
+        <div className="month-nav-center">
+          <button
+            className="nav-btn"
+            onClick={handlePrev}
+            disabled={!canGoBack}
+          >
+            <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
+              <path d="M10 12L6 8L10 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+          <span className="nav-label">{rangeLabel} {year}</span>
+          <button
+            className="nav-btn"
+            onClick={handleNext}
+            disabled={!canGoForward}
+          >
+            <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
+              <path d="M6 4L10 8L6 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+        </div>
       </div>
       {count === 1 ? (
         <MonthDetail

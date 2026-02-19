@@ -5,7 +5,6 @@ import Header from './components/Header';
 import FilterBar from './components/FilterBar';
 import YearGrid from './components/YearGrid';
 import MultiMonthView from './components/MultiMonthView';
-import MonthDetail from './components/MonthDetail';
 import ListView from './components/ListView';
 import EventModal from './components/EventModal';
 import './App.css';
@@ -17,7 +16,6 @@ function App() {
   );
   const [searchQuery, setSearchQuery] = useState('');
   const [view, setView] = useState('year');
-  const [selectedMonth, setSelectedMonth] = useState(null);
   const [startMonth, setStartMonth] = useState(0);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [hoveredEvent, setHoveredEvent] = useState(null);
@@ -62,18 +60,16 @@ function App() {
   const selectNone = () => setActiveCategories(new Set());
 
   const handleMonthClick = (month) => {
-    setSelectedMonth(month);
-    setView('detail');
+    setStartMonth(month);
+    setView('1mo');
   };
 
   const handleBackToYear = () => {
     setView('year');
-    setSelectedMonth(null);
   };
 
   const handleViewChange = (newView) => {
     setView(newView);
-    setSelectedMonth(null);
     if (newView === '1mo' || newView === '2mo' || newView === '3mo') {
       setStartMonth(0);
     }
@@ -169,18 +165,7 @@ function App() {
             hoveredEvent={hoveredEvent}
             onEventHover={setHoveredEvent}
             searchQuery={searchQuery}
-          />
-        )}
-        {view === 'detail' && selectedMonth !== null && (
-          <MonthDetail
-            year={2026}
-            month={selectedMonth}
-            events={calendarEvents}
-            monthNotes={monthNotes}
-            onBack={handleBackToYear}
-            onEventClick={setSelectedEvent}
-            hoveredEvent={hoveredEvent}
-            onEventHover={setHoveredEvent}
+            onBackToYear={handleBackToYear}
           />
         )}
         {view === 'list' && (
