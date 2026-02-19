@@ -22,3 +22,20 @@
   color: var(--warm-gray);
   letter-spacing: 1px;
 }
+
+/* ========== Responsive ========== */
+@media (max-width: 480px) {
+  .header {
+    padding: 20px 0 12px;
+    margin-bottom: 10px;
+  }
+
+  .header-title {
+    font-size: 18px;
+    letter-spacing: 1px;
+  }
+
+  .header-subtitle {
+    font-size: 12px;
+  }
+}

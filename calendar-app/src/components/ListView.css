@@ -117,3 +117,47 @@
 .list-status.tentative {
   color: #D4AC0D;
 }
+
+/* ========== Responsive ========== */
+@media (max-width: 768px) {
+  .list-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 12px;
+    padding: 10px 14px;
+  }
+
+  .list-date {
+    font-size: 12px;
+  }
+
+  .list-name {
+    font-size: 13px;
+  }
+
+  .list-cat-badge {
+    font-size: 10px;
+    padding: 2px 8px;
+  }
+
+  .list-controls {
+    padding: 10px 14px;
+    flex-wrap: wrap;
+  }
+
+  .list-month-header {
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .list-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    padding: 8px 10px;
+  }
+
+  .list-status {
+    text-align: left;
+  }
+}

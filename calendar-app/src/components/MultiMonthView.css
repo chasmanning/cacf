@@ -89,3 +89,52 @@
 .multi-month-grid.cols-3 {
   grid-template-columns: repeat(3, 1fr);
 }
+
+/* ========== Responsive ========== */
+@media (max-width: 1024px) {
+  .multi-month-grid.cols-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .multi-month-nav {
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .nav-label {
+    font-size: 15px;
+    min-width: 180px;
+  }
+
+  .nav-btn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .month-nav-center {
+    gap: 8px;
+  }
+
+  .multi-month-grid.cols-2,
+  .multi-month-grid.cols-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .multi-month-grid {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-label {
+    font-size: 14px;
+    min-width: 140px;
+  }
+
+  .year-back-btn {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+}

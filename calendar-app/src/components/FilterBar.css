@@ -62,3 +62,31 @@
   background: #d9d4cc;
   color: #333;
 }
+
+/* ========== Responsive ========== */
+@media (max-width: 768px) {
+  .filter-bar {
+    gap: 8px;
+  }
+
+  .filter-pill {
+    padding: 3px 10px;
+    font-size: 11px;
+  }
+
+  .filter-actions {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .filter-pill {
+    padding: 3px 8px;
+    font-size: 10px;
+  }
+
+  .filter-action {
+    padding: 3px 8px;
+    font-size: 10px;
+  }
+}
