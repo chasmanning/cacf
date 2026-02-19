@@ -1,0 +1,119 @@
+.list-view {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  animation: fadeIn 0.3s ease;
+}
+
+.list-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 20px;
+  border-bottom: 2px solid var(--crimson);
+}
+
+.list-sort-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #888;
+}
+
+.list-sort-btn {
+  padding: 4px 14px;
+  border-radius: 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+  background: #e8e4de;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.list-sort-btn.active {
+  background: var(--crimson);
+  color: #fff;
+}
+
+.list-sort-btn:hover:not(.active) {
+  background: #d9d4cc;
+}
+
+.list-body {
+  padding: 0;
+}
+
+.list-month-group {
+  border-bottom: 1px solid #f0ece6;
+}
+
+.list-month-group:last-child {
+  border-bottom: none;
+}
+
+.list-month-header {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--crimson);
+  background: #faf8f5;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.list-row {
+  display: grid;
+  grid-template-columns: 160px 1fr 160px 100px;
+  align-items: center;
+  padding: 10px 20px;
+  gap: 12px;
+  border-bottom: 1px solid #f5f2ed;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.list-row:hover {
+  background: #faf8f5;
+}
+
+.list-row:last-child {
+  border-bottom: none;
+}
+
+.list-date {
+  font-size: 13px;
+  color: #666;
+  font-weight: 500;
+}
+
+.list-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.list-cat-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.list-status {
+  font-size: 12px;
+  font-weight: 600;
+  text-align: right;
+}
+
+.list-status.confirmed {
+  color: #27AE60;
+}
+
+.list-status.tentative {
+  color: #D4AC0D;
+}

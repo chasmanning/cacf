@@ -1,0 +1,24 @@
+.header {
+  padding: 32px 0 20px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.header-inner {
+  display: inline-block;
+}
+
+.header-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--crimson);
+  letter-spacing: 2px;
+  margin-bottom: 4px;
+}
+
+.header-subtitle {
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--warm-gray);
+  letter-spacing: 1px;
+}
