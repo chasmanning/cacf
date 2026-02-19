@@ -26,67 +26,38 @@ function MonthCell({
     return monthNotes.filter((ev) => eventOverlapsMonth(ev, year, month));
   }, [monthNotes, year, month]);
 
-  // Allocate event lanes per week row so multi-day bars don't overlap
-  const weekEventLanes = useMemo(() => {
-    return weeks.map((week) => {
-      const lanes = [];
-      const weekStart = week.find((d) => d !== null) || 1;
-      const weekEnd = week[6] !== null ? week[6] : week.filter((d) => d !== null).pop() || weekStart;
-
-      for (const ev of monthEvents) {
-        if (!ev.span) continue;
-        const evS = ev.span.startDay;
-        const evE = ev.span.endDay;
-        if (evE < weekStart || evS > weekEnd) continue;
-
-        const barStart = Math.max(evS, weekStart);
-        const barEnd = Math.min(evE, weekEnd);
-        const startCol = week.indexOf(barStart);
-        const endCol = week.indexOf(barEnd);
-        if (startCol === -1 || endCol === -1) continue;
-
-        let laneIdx = 0;
-        while (true) {
-          if (!lanes[laneIdx]) lanes[laneIdx] = [];
-          const conflict = lanes[laneIdx].some(
-            (existing) =>
-              !(endCol < existing.startCol || startCol > existing.endCol)
-          );
-          if (!conflict) {
-            lanes[laneIdx].push({
-              event: ev,
-              startCol,
-              endCol,
-              barStart,
-              barEnd,
-              continuesLeft: evS < weekStart,
-              continuesRight: evE > weekEnd,
-            });
-            break;
-          }
-          laneIdx++;
-        }
+  // Build a map of day -> events for coloring cells
+  const dayEventsMap = useMemo(() => {
+    const map = {};
+    for (const ev of monthEvents) {
+      if (!ev.span) continue;
+      for (let d = ev.span.startDay; d <= ev.span.endDay; d++) {
+        if (!map[d]) map[d] = [];
+        map[d].push(ev);
       }
-      return lanes;
-    });
-  }, [weeks, monthEvents]);
+    }
+    return map;
+  }, [monthEvents]);
 
-  const handleEventMouseEnter = (ev, e) => {
-    onEventHover(ev);
+  const handleDayMouseEnter = (day, e) => {
+    const evts = dayEventsMap[day];
+    if (!evts || evts.length === 0) return;
+    // Show tooltip for the primary (longest) event
+    onEventHover(evts[0]);
     const rect = e.currentTarget.getBoundingClientRect();
-    setTooltip({ event: ev, x: rect.left + rect.width / 2, y: rect.top });
+    setTooltip({ events: evts, x: rect.left + rect.width / 2, y: rect.top });
   };
 
-  const handleEventMouseLeave = () => {
+  const handleDayMouseLeave = () => {
     onEventHover(null);
     setTooltip(null);
   };
 
-  const isEventHighlighted = (ev) => {
-    if (hoveredEvent && hoveredEvent.name === ev.name && hoveredEvent.startDate === ev.startDate) {
-      return 'highlighted';
-    }
-    return '';
+  const handleDayClick = (day, e) => {
+    const evts = dayEventsMap[day];
+    if (!evts || evts.length === 0) return;
+    e.stopPropagation();
+    onEventClick(evts[0]);
   };
 
   return (
@@ -102,51 +73,55 @@ function MonthCell({
         </div>
         <div className="weeks">
           {weeks.map((week, wi) => (
-            <div key={wi} className="week-row">
-              <div className="day-numbers">
-                {week.map((day, di) => {
-                  const isWeekend = di === 0 || di === 6;
-                  return (
-                    <div
-                      key={di}
-                      className={`day-cell ${day === null ? 'empty' : ''} ${isWeekend ? 'weekend' : ''}`}
-                    >
-                      {day !== null && <span className="day-num">{day}</span>}
-                    </div>
-                  );
-                })}
-              </div>
-              <div className="event-lanes">
-                {weekEventLanes[wi]?.map((lane, li) => (
-                  <div key={li} className="event-lane">
-                    {lane.map((item, ii) => {
-                      const cat = CATEGORIES[item.event.category] || {};
-                      const colSpan = item.endCol - item.startCol + 1;
-                      const isHovered = isEventHighlighted(item.event);
-                      const dimmed = searchQuery && !item.event.name.toLowerCase().includes(searchQuery.toLowerCase());
-                      return (
-                        <div
-                          key={ii}
-                          className={`event-bar ${isHovered} ${dimmed ? 'dimmed' : ''} ${item.continuesLeft ? 'continues-left' : ''} ${item.continuesRight ? 'continues-right' : ''}`}
-                          style={{
-                            gridColumn: `${item.startCol + 1} / span ${colSpan}`,
-                            backgroundColor: cat.color,
-                            color: cat.textColor,
-                          }}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            onEventClick(item.event);
-                          }}
-                          onMouseEnter={(e) => handleEventMouseEnter(item.event, e)}
-                          onMouseLeave={handleEventMouseLeave}
-                        >
-                          <span className="event-bar-label">{item.event.name}</span>
-                        </div>
-                      );
-                    })}
+            <div key={wi} className="day-row">
+              {week.map((day, di) => {
+                const isWeekend = di === 0 || di === 6;
+                const evts = day ? dayEventsMap[day] || [] : [];
+                const primary = evts[0];
+                const cat = primary ? CATEGORIES[primary.category] || {} : null;
+                const hasEvents = evts.length > 0;
+                const isHovered = hasEvents && hoveredEvent &&
+                  evts.some((ev) => ev.name === hoveredEvent.name && ev.startDate === hoveredEvent.startDate);
+                const dimmed = hasEvents && searchQuery &&
+                  !evts.some((ev) => ev.name.toLowerCase().includes(searchQuery.toLowerCase()));
+
+                // For multiple events, build a gradient stripe
+                let bgStyle = {};
+                if (evts.length === 1) {
+                  bgStyle = { backgroundColor: cat.color };
+                } else if (evts.length > 1) {
+                  const stops = evts.map((ev, i) => {
+                    const c = CATEGORIES[ev.category]?.color || '#999';
+                    const pct1 = (i / evts.length) * 100;
+                    const pct2 = ((i + 1) / evts.length) * 100;
+                    return `${c} ${pct1}%, ${c} ${pct2}%`;
+                  }).join(', ');
+                  bgStyle = { background: `linear-gradient(135deg, ${stops})` };
+                }
+
+                return (
+                  <div
+                    key={di}
+                    className={`day-cell ${day === null ? 'empty' : ''} ${isWeekend && !hasEvents ? 'weekend' : ''} ${hasEvents ? 'has-event' : ''} ${isHovered ? 'hovered' : ''} ${dimmed ? 'dimmed' : ''}`}
+                    style={hasEvents ? bgStyle : undefined}
+                    onMouseEnter={day ? (e) => handleDayMouseEnter(day, e) : undefined}
+                    onMouseLeave={day ? handleDayMouseLeave : undefined}
+                    onClick={day ? (e) => handleDayClick(day, e) : undefined}
+                  >
+                    {day !== null && (
+                      <span
+                        className="day-num"
+                        style={hasEvents ? { color: cat?.textColor || '#fff' } : undefined}
+                      >
+                        {day}
+                      </span>
+                    )}
+                    {evts.length > 1 && (
+                      <span className="multi-dot">{evts.length}</span>
+                    )}
                   </div>
-                ))}
-              </div>
+                );
+              })}
             </div>
           ))}
         </div>
@@ -163,7 +138,8 @@ function MonthCell({
       )}
       {tooltip && (
         <Tooltip
-          event={tooltip.event}
+          event={tooltip.events[0]}
+          allEvents={tooltip.events}
           x={tooltip.x}
           y={tooltip.y}
         />

@@ -49,25 +49,23 @@
   gap: 0;
 }
 
-.week-row {
-  display: flex;
-  flex-direction: column;
-  min-height: 20px;
-}
-
-.day-numbers {
+.day-row {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 0;
+  gap: 1px;
 }
 
 .day-cell {
   text-align: center;
-  padding: 1px;
-  min-height: 16px;
+  padding: 2px 1px;
+  min-height: 22px;
   background: var(--day-bg);
   border: 0.5px solid #eee;
   position: relative;
+  transition: transform 0.12s, box-shadow 0.12s, opacity 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .day-cell.empty {
@@ -79,68 +77,46 @@
   background: var(--weekend-bg);
 }
 
-.day-num {
-  font-size: 9px;
-  color: #666;
-  font-weight: 500;
-  line-height: 1;
-}
-
-/* Event lanes */
-.event-lanes {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  padding: 0 0 1px;
-}
-
-.event-lane {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 0;
-  min-height: 13px;
-}
-
-.event-bar {
-  border-radius: 3px;
-  padding: 0 3px;
-  font-size: 8px;
-  font-weight: 600;
-  line-height: 13px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.day-cell.has-event {
   cursor: pointer;
-  transition: opacity 0.2s, transform 0.15s;
-  margin: 0 1px;
+  border-radius: 3px;
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
-.event-bar:hover,
-.event-bar.highlighted {
-  opacity: 0.9;
-  transform: scale(1.02);
+.day-cell.has-event:hover,
+.day-cell.has-event.hovered {
+  transform: scale(1.15);
   z-index: 10;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  border-color: rgba(255, 255, 255, 0.6);
 }
 
-.event-bar.dimmed {
-  opacity: 0.2;
+.day-cell.dimmed {
+  opacity: 0.25;
 }
 
-.event-bar.continues-left {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-  margin-left: 0;
+.day-num {
+  font-size: 10px;
+  color: #666;
+  font-weight: 600;
+  line-height: 1;
+  position: relative;
+  z-index: 1;
 }
 
-.event-bar.continues-right {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  margin-right: 0;
-}
-
-.event-bar-label {
-  pointer-events: none;
+/* Small badge showing count of events when multiple */
+.multi-dot {
+  position: absolute;
+  bottom: 1px;
+  right: 1px;
+  font-size: 7px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+  padding: 0 2px;
+  line-height: 10px;
+  z-index: 1;
 }
 
 /* Month notes */
@@ -155,19 +131,4 @@
 
 .month-note {
   font-weight: 500;
-}
-
-/* Compact adjustments for year-at-a-glance */
-.month-cell.compact .day-cell {
-  min-height: 14px;
-}
-
-.month-cell.compact .event-bar {
-  font-size: 7px;
-  line-height: 11px;
-  min-height: 11px;
-}
-
-.month-cell.compact .event-lane {
-  min-height: 11px;
 }

@@ -8,6 +8,7 @@
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.14);
   z-index: 1000;
   min-width: 200px;
+  max-width: 300px;
   pointer-events: none;
   animation: tooltipIn 0.15s ease;
 }
@@ -17,11 +18,21 @@
   to { opacity: 1; transform: translate(-50%, -100%) translateY(0); }
 }
 
+.tooltip-event {
+  /* no extra margin for first event */
+}
+
+.tooltip-event-extra {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #eee;
+}
+
 .tooltip-header {
   display: flex;
   align-items: center;
   gap: 6px;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .tooltip-cat-dot {
