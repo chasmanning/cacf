@@ -1,5 +1,6 @@
 import { MONTH_NAMES } from '../constants';
 import MonthCell from './MonthCell';
+import MonthDetail from './MonthDetail';
 import './MultiMonthView.css';
 
 function MultiMonthView({
@@ -27,9 +28,6 @@ function MultiMonthView({
     ? MONTH_NAMES[months[0]]
     : `${MONTH_NAMES[months[0]]} – ${MONTH_NAMES[months[months.length - 1]]}`;
 
-  // 1 month = lg, 2 months = md, 3 months = md
-  const cellSize = count === 1 ? 'lg' : 'md';
-
   return (
     <div className="multi-month-view">
       <div className="multi-month-nav">
@@ -53,23 +51,35 @@ function MultiMonthView({
           </svg>
         </button>
       </div>
-      <div className={`multi-month-grid cols-${count}`}>
-        {months.map((m) => (
-          <MonthCell
-            key={m}
-            year={year}
-            month={m}
-            events={events}
-            monthNotes={monthNotes}
-            onMonthClick={onMonthClick}
-            onEventClick={onEventClick}
-            hoveredEvent={hoveredEvent}
-            onEventHover={onEventHover}
-            searchQuery={searchQuery}
-            size={cellSize}
-          />
-        ))}
-      </div>
+      {count === 1 ? (
+        <MonthDetail
+          year={year}
+          month={months[0]}
+          events={events}
+          monthNotes={monthNotes}
+          onEventClick={onEventClick}
+          hoveredEvent={hoveredEvent}
+          onEventHover={onEventHover}
+        />
+      ) : (
+        <div className={`multi-month-grid cols-${count}`}>
+          {months.map((m) => (
+            <MonthCell
+              key={m}
+              year={year}
+              month={m}
+              events={events}
+              monthNotes={monthNotes}
+              onMonthClick={onMonthClick}
+              onEventClick={onEventClick}
+              hoveredEvent={hoveredEvent}
+              onEventHover={onEventHover}
+              searchQuery={searchQuery}
+              size="md"
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
