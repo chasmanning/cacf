@@ -104,7 +104,7 @@ function MonthCell({
                 return (
                   <div
                     key={di}
-                    className={`day-cell ${day === null ? 'empty' : ''} ${isWeekend && !hasEvents ? 'weekend' : ''} ${hasEvents ? 'has-event' : ''} ${isHovered ? 'hovered' : ''} ${dimmed ? 'dimmed' : ''}`}
+                    className={`day-cell ${day === null ? 'empty' : ''} ${day !== null && isWeekend && !hasEvents ? 'weekend' : ''} ${hasEvents ? 'has-event' : ''} ${isHovered ? 'hovered' : ''} ${dimmed ? 'dimmed' : ''}`}
                     style={hasEvents ? bgStyle : undefined}
                     onMouseEnter={day ? (e) => handleDayMouseEnter(day, e) : undefined}
                     onMouseLeave={day ? handleDayMouseLeave : undefined}

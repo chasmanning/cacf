@@ -106,7 +106,7 @@ function MonthDetail({
                 return (
                   <div
                     key={di}
-                    className={`detail-day-cell ${day === null ? 'empty' : ''} ${isWeekend && !hasEvents ? 'weekend' : ''} ${hasEvents ? 'has-event' : ''} ${isHovered ? 'hovered' : ''}`}
+                    className={`detail-day-cell ${day === null ? 'empty' : ''} ${day !== null && isWeekend && !hasEvents ? 'weekend' : ''} ${hasEvents ? 'has-event' : ''} ${isHovered ? 'hovered' : ''}`}
                     style={hasEvents ? bgStyle : undefined}
                     onMouseEnter={day ? (e) => handleDayMouseEnter(day, e) : undefined}
                     onMouseLeave={day ? handleDayMouseLeave : undefined}
