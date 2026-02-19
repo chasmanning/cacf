@@ -27,7 +27,7 @@ function YearGrid({ year, events, monthNotes, onMonthClick, onEventClick, hovere
                 hoveredEvent={hoveredEvent}
                 onEventHover={onEventHover}
                 searchQuery={searchQuery}
-                compact
+                size="sm"
               />
             ))}
           </div>

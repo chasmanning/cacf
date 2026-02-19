@@ -46,7 +46,7 @@
 .weeks {
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 1px;
 }
 
 .day-row {
@@ -85,7 +85,7 @@
 
 .day-cell.has-event:hover,
 .day-cell.has-event.hovered {
-  transform: scale(1.15);
+  transform: scale(1.1);
   z-index: 10;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   border-color: rgba(255, 255, 255, 0.6);
@@ -104,7 +104,6 @@
   z-index: 1;
 }
 
-/* Small badge showing count of events when multiple */
 .multi-dot {
   position: absolute;
   bottom: 1px;
@@ -119,6 +118,24 @@
   z-index: 1;
 }
 
+/* Event name labels inside cells (for md/lg sizes) */
+.cell-event-names {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+.cell-event-name {
+  font-weight: 600;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  opacity: 0.95;
+}
+
 /* Month notes */
 .month-notes {
   padding: 4px 8px;
@@ -131,4 +148,138 @@
 
 .month-note {
   font-weight: 500;
+}
+
+/* ========== SIZE: sm (year-at-a-glance) ========== */
+.month-cell.size-sm .day-cell {
+  min-height: 20px;
+}
+
+.month-cell.size-sm .day-num {
+  font-size: 9px;
+}
+
+.month-cell.size-sm .day-cell.has-event:hover,
+.month-cell.size-sm .day-cell.has-event.hovered {
+  transform: scale(1.15);
+}
+
+/* ========== SIZE: md (2-3 month views) ========== */
+.month-cell.size-md .month-header {
+  padding: 8px 12px;
+  font-size: 15px;
+}
+
+.month-cell.size-md .month-body {
+  padding: 6px;
+}
+
+.month-cell.size-md .day-names {
+  margin-bottom: 4px;
+}
+
+.month-cell.size-md .day-name {
+  font-size: 11px;
+  padding: 4px 0;
+}
+
+.month-cell.size-md .weeks {
+  gap: 2px;
+}
+
+.month-cell.size-md .day-row {
+  gap: 2px;
+}
+
+.month-cell.size-md .day-cell {
+  min-height: 48px;
+  padding: 4px 3px;
+  border-radius: 4px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.month-cell.size-md .day-num {
+  font-size: 11px;
+  margin-bottom: 2px;
+}
+
+.month-cell.size-md .cell-event-name {
+  font-size: 8px;
+}
+
+.month-cell.size-md .month-notes {
+  font-size: 11px;
+  padding: 6px 10px;
+}
+
+.month-cell.size-md .day-cell.has-event:hover,
+.month-cell.size-md .day-cell.has-event.hovered {
+  transform: scale(1.05);
+}
+
+/* ========== SIZE: lg (1 month view) ========== */
+.month-cell.size-lg .month-header {
+  padding: 12px 16px;
+  font-size: 18px;
+  letter-spacing: 2px;
+}
+
+.month-cell.size-lg .month-body {
+  padding: 10px;
+}
+
+.month-cell.size-lg .day-names {
+  margin-bottom: 6px;
+}
+
+.month-cell.size-lg .day-name {
+  font-size: 13px;
+  font-weight: 700;
+  padding: 6px 0;
+  color: #777;
+}
+
+.month-cell.size-lg .weeks {
+  gap: 3px;
+}
+
+.month-cell.size-lg .day-row {
+  gap: 3px;
+}
+
+.month-cell.size-lg .day-cell {
+  min-height: 80px;
+  padding: 6px;
+  border-radius: 6px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  border: 1px solid #eee;
+}
+
+.month-cell.size-lg .day-cell.has-event {
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.month-cell.size-lg .day-num {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.month-cell.size-lg .cell-event-name {
+  font-size: 11px;
+}
+
+.month-cell.size-lg .month-notes {
+  font-size: 13px;
+  padding: 10px 14px;
+}
+
+.month-cell.size-lg .day-cell.has-event:hover,
+.month-cell.size-lg .day-cell.has-event.hovered {
+  transform: scale(1.03);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }

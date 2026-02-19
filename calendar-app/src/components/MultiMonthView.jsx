@@ -27,6 +27,9 @@ function MultiMonthView({
     ? MONTH_NAMES[months[0]]
     : `${MONTH_NAMES[months[0]]} – ${MONTH_NAMES[months[months.length - 1]]}`;
 
+  // 1 month = lg, 2 months = md, 3 months = md
+  const cellSize = count === 1 ? 'lg' : 'md';
+
   return (
     <div className="multi-month-view">
       <div className="multi-month-nav">
@@ -63,7 +66,7 @@ function MultiMonthView({
             hoveredEvent={hoveredEvent}
             onEventHover={onEventHover}
             searchQuery={searchQuery}
-            compact={false}
+            size={cellSize}
           />
         ))}
       </div>

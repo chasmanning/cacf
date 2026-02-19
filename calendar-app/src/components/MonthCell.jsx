@@ -6,7 +6,7 @@ import './MonthCell.css';
 
 function MonthCell({
   year, month, events, monthNotes, onMonthClick,
-  onEventClick, hoveredEvent, onEventHover, searchQuery, compact
+  onEventClick, hoveredEvent, onEventHover, searchQuery, size = 'sm'
 }) {
   const [tooltip, setTooltip] = useState(null);
   const weeks = useMemo(() => getWeeksForMonth(year, month), [year, month]);
@@ -26,7 +26,6 @@ function MonthCell({
     return monthNotes.filter((ev) => eventOverlapsMonth(ev, year, month));
   }, [monthNotes, year, month]);
 
-  // Build a map of day -> events for coloring cells
   const dayEventsMap = useMemo(() => {
     const map = {};
     for (const ev of monthEvents) {
@@ -42,7 +41,6 @@ function MonthCell({
   const handleDayMouseEnter = (day, e) => {
     const evts = dayEventsMap[day];
     if (!evts || evts.length === 0) return;
-    // Show tooltip for the primary (longest) event
     onEventHover(evts[0]);
     const rect = e.currentTarget.getBoundingClientRect();
     setTooltip({ events: evts, x: rect.left + rect.width / 2, y: rect.top });
@@ -60,15 +58,20 @@ function MonthCell({
     onEventClick(evts[0]);
   };
 
+  const showLabels = size === 'md' || size === 'lg';
+  const showFullDayNames = size !== 'sm';
+
   return (
-    <div className={`month-cell ${compact ? 'compact' : ''}`}>
+    <div className={`month-cell size-${size}`}>
       <div className="month-header" onClick={() => onMonthClick(month)}>
         {MONTH_NAMES[month]}
       </div>
       <div className="month-body">
         <div className="day-names">
           {DAY_NAMES.map((d) => (
-            <div key={d} className="day-name">{d[0]}</div>
+            <div key={d} className="day-name">
+              {showFullDayNames ? d : d[0]}
+            </div>
           ))}
         </div>
         <div className="weeks">
@@ -85,7 +88,6 @@ function MonthCell({
                 const dimmed = hasEvents && searchQuery &&
                   !evts.some((ev) => ev.name.toLowerCase().includes(searchQuery.toLowerCase()));
 
-                // For multiple events, build a gradient stripe
                 let bgStyle = {};
                 if (evts.length === 1) {
                   bgStyle = { backgroundColor: cat.color };
@@ -116,7 +118,23 @@ function MonthCell({
                         {day}
                       </span>
                     )}
-                    {evts.length > 1 && (
+                    {showLabels && hasEvents && (
+                      <div className="cell-event-names">
+                        {evts.map((ev, i) => {
+                          const evCat = CATEGORIES[ev.category] || {};
+                          return (
+                            <span
+                              key={i}
+                              className="cell-event-name"
+                              style={{ color: evts.length === 1 ? (cat?.textColor || '#fff') : (evCat.textColor || '#fff') }}
+                            >
+                              {ev.name}
+                            </span>
+                          );
+                        })}
+                      </div>
+                    )}
+                    {!showLabels && evts.length > 1 && (
                       <span className="multi-dot">{evts.length}</span>
                     )}
                   </div>
