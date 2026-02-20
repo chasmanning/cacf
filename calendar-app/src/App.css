@@ -71,6 +71,32 @@
   color: #333;
 }
 
+/* Print button */
+.print-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--crimson);
+  background: #fff;
+  border: 1.5px solid var(--crimson);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.print-btn:hover {
+  background: var(--crimson);
+  color: #fff;
+}
+
+.print-btn svg {
+  flex-shrink: 0;
+}
+
 /* View toggles */
 .view-toggles {
   display: flex;
@@ -149,5 +175,103 @@
   .view-toggles button {
     padding: 6px 6px;
     font-size: 11px;
+  }
+}
+
+/* ========== Print / PDF ========== */
+@media print {
+  /* Force background colors to print */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  body {
+    background: #fff !important;
+  }
+
+  .app {
+    max-width: none;
+    padding: 0;
+  }
+
+  /* Hide interactive controls */
+  .controls,
+  .print-btn,
+  .modal-overlay,
+  .multi-month-nav,
+  .back-btn,
+  .list-controls {
+    display: none !important;
+  }
+
+  /* Remove shadows and animations */
+  .month-cell,
+  .month-detail,
+  .list-view {
+    box-shadow: none !important;
+    animation: none !important;
+  }
+
+  .multi-month-view,
+  .main-content {
+    animation: none !important;
+  }
+
+  /* Keep header compact */
+  .header {
+    padding: 12px 0 8px;
+    margin-bottom: 8px;
+  }
+
+  /* Year grid: keep 3 columns, tighten spacing */
+  .quarter-months {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 10px;
+    padding: 8px 0;
+  }
+
+  .quarter-divider {
+    margin: 2px 0;
+  }
+
+  /* Prevent months from splitting across pages */
+  .month-cell {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .quarter-row {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Disable hover effects */
+  .day-cell.has-event:hover,
+  .day-cell.has-event.hovered,
+  .detail-day-cell.has-event:hover,
+  .detail-day-cell.has-event.hovered {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Month detail: remove back button area, show title only */
+  .month-detail-top {
+    padding: 10px 16px;
+  }
+
+  /* List view: clean table for print */
+  .list-view {
+    border-radius: 0;
+  }
+
+  .list-row {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Page setup hint (landscape works best for year view) */
+  @page {
+    margin: 0.5in;
   }
 }
