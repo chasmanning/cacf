@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
-import { CATEGORIES } from './constants';
-import { isMonthLevel } from './utils';
+import { CATEGORIES, MONTH_NAMES } from './constants';
+import { isMonthLevel, formatDateRange, parseDate } from './utils';
 import Header from './components/Header';
 import FilterBar from './components/FilterBar';
 import YearGrid from './components/YearGrid';
@@ -74,6 +74,14 @@ function App() {
       setStartMonth(0);
     }
   };
+
+  const sortedEvents = useMemo(() => {
+    return [...filteredEvents].sort((a, b) => parseDate(a.startDate) - parseDate(b.startDate));
+  }, [filteredEvents]);
+
+  const activeCategoryList = useMemo(() => {
+    return Object.entries(CATEGORIES).filter(([name]) => activeCategories.has(name));
+  }, [activeCategories]);
 
   const isMultiMonth = view === '1mo' || view === '2mo' || view === '3mo';
   const monthCount = view === '1mo' ? 1 : view === '2mo' ? 2 : view === '3mo' ? 3 : 0;
@@ -181,6 +189,52 @@ function App() {
           />
         )}
       </main>
+      {/* Print-only legend and event list */}
+      <div className="print-footer">
+        <div className="print-legend">
+          <div className="print-section-title">Legend</div>
+          <div className="print-legend-items">
+            {activeCategoryList.map(([name, cat]) => (
+              <span key={name} className="print-legend-item">
+                <span
+                  className="print-legend-swatch"
+                  style={{ background: cat.color }}
+                />
+                {name}
+              </span>
+            ))}
+          </div>
+        </div>
+        <div className="print-event-list">
+          <div className="print-section-title">Events</div>
+          <table className="print-event-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Event</th>
+                <th>Category</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {sortedEvents.map((ev, i) => (
+                <tr key={i}>
+                  <td>{formatDateRange(ev.startDate, ev.endDate)}</td>
+                  <td>{ev.name}</td>
+                  <td>
+                    <span
+                      className="print-cat-dot"
+                      style={{ background: CATEGORIES[ev.category]?.color }}
+                    />
+                    {ev.category}
+                  </td>
+                  <td>{ev.status !== 'nan' ? ev.status : ''}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
       {selectedEvent && (
         <EventModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />
       )}

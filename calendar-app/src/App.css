@@ -178,6 +178,11 @@
   }
 }
 
+/* Print footer: hidden on screen */
+.print-footer {
+  display: none;
+}
+
 /* ========== Print / PDF ========== */
 @media print {
   /* Force background colors to print */
@@ -268,6 +273,93 @@
   .list-row {
     break-inside: avoid;
     page-break-inside: avoid;
+  }
+
+  /* Print footer: legend + event list */
+  .print-footer {
+    display: block !important;
+    page-break-before: auto;
+    margin-top: 24px;
+  }
+
+  .print-section-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--crimson);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 1.5px solid var(--crimson);
+  }
+
+  .print-legend {
+    margin-bottom: 20px;
+  }
+
+  .print-legend-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+  }
+
+  .print-legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .print-legend-swatch {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .print-event-list {
+    break-inside: avoid;
+  }
+
+  .print-event-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9px;
+  }
+
+  .print-event-table th {
+    text-align: left;
+    font-weight: 700;
+    color: #666;
+    padding: 4px 8px;
+    border-bottom: 1px solid #ccc;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .print-event-table td {
+    padding: 3px 8px;
+    border-bottom: 1px solid #eee;
+    color: #333;
+    vertical-align: top;
+  }
+
+  .print-event-table tr {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .print-cat-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 4px;
+    vertical-align: middle;
   }
 
   /* Page setup hint (landscape works best for year view) */
