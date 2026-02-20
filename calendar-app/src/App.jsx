@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { CATEGORIES, MONTH_NAMES } from './constants';
-import { isMonthLevel, formatDateRange, parseDate } from './utils';
+import { isMonthLevel, formatDateRange, parseDate, eventOverlapsMonth } from './utils';
 import Header from './components/Header';
 import FilterBar from './components/FilterBar';
 import YearGrid from './components/YearGrid';
@@ -75,13 +75,27 @@ function App() {
     }
   };
 
-  const sortedEvents = useMemo(() => {
-    return [...filteredEvents].sort((a, b) => parseDate(a.startDate) - parseDate(b.startDate));
-  }, [filteredEvents]);
-
   const activeCategoryList = useMemo(() => {
     return Object.entries(CATEGORIES).filter(([name]) => activeCategories.has(name));
   }, [activeCategories]);
+
+  const visibleMonths = useMemo(() => {
+    if (view === '1mo') return [startMonth];
+    if (view === '2mo') return [startMonth, startMonth + 1].filter((m) => m < 12);
+    if (view === '3mo') return [startMonth, startMonth + 1, startMonth + 2].filter((m) => m < 12);
+    return Array.from({ length: 12 }, (_, i) => i); // year, list
+  }, [view, startMonth]);
+
+  const printAgenda = useMemo(() => {
+    return visibleMonths
+      .map((month) => {
+        const monthEvents = filteredEvents
+          .filter((ev) => eventOverlapsMonth(ev, 2026, month))
+          .sort((a, b) => parseDate(a.startDate) - parseDate(b.startDate));
+        return { month, events: monthEvents };
+      })
+      .filter((g) => g.events.length > 0);
+  }, [filteredEvents, visibleMonths]);
 
   const isMultiMonth = view === '1mo' || view === '2mo' || view === '3mo';
   const monthCount = view === '1mo' ? 1 : view === '2mo' ? 2 : view === '3mo' ? 3 : 0;
@@ -189,7 +203,7 @@ function App() {
           />
         )}
       </main>
-      {/* Print-only legend and event list */}
+      {/* Print-only legend and agenda */}
       <div className="print-footer">
         <div className="print-legend">
           <div className="print-section-title">Legend</div>
@@ -205,34 +219,25 @@ function App() {
             ))}
           </div>
         </div>
-        <div className="print-event-list">
-          <div className="print-section-title">Events</div>
-          <table className="print-event-table">
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Event</th>
-                <th>Category</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {sortedEvents.map((ev, i) => (
-                <tr key={i}>
-                  <td>{formatDateRange(ev.startDate, ev.endDate)}</td>
-                  <td>{ev.name}</td>
-                  <td>
-                    <span
-                      className="print-cat-dot"
-                      style={{ background: CATEGORIES[ev.category]?.color }}
-                    />
-                    {ev.category}
-                  </td>
-                  <td>{ev.status !== 'nan' ? ev.status : ''}</td>
-                </tr>
+        <div className="print-agenda">
+          <div className="print-section-title">Agenda</div>
+          {printAgenda.map(({ month, events: monthEvents }) => (
+            <div key={month} className="print-agenda-month">
+              <div className="print-agenda-month-name">{MONTH_NAMES[month]}</div>
+              {monthEvents.map((ev, i) => (
+                <div key={i} className="print-agenda-item">
+                  <span
+                    className="print-cat-dot"
+                    style={{ background: CATEGORIES[ev.category]?.color }}
+                  />
+                  <span className="print-agenda-date">
+                    {formatDateRange(ev.startDate, ev.endDate)}
+                  </span>
+                  <span className="print-agenda-name">{ev.name}</span>
+                </div>
               ))}
-            </tbody>
-          </table>
+            </div>
+          ))}
         </div>
       </div>
       {selectedEvent && (
