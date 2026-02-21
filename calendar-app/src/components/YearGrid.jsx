@@ -2,7 +2,7 @@ import { MONTH_NAMES } from '../constants';
 import MonthCell from './MonthCell';
 import './YearGrid.css';
 
-function YearGrid({ year, events, monthNotes, onMonthClick, onEventClick, hoveredEvent, onEventHover, searchQuery }) {
+function YearGrid({ year, events, monthNotes, onMonthClick, onEventClick, hoveredEvent, onEventHover, searchQuery, activeCategoryList }) {
   const quarters = [
     [0, 1, 2],
     [3, 4, 5],
@@ -31,6 +31,19 @@ function YearGrid({ year, events, monthNotes, onMonthClick, onEventClick, hovere
               />
             ))}
           </div>
+          {activeCategoryList && (
+            <div className="quarter-print-legend">
+              {activeCategoryList.map(([name, cat]) => (
+                <span key={name} className="quarter-legend-item">
+                  <span
+                    className="quarter-legend-swatch"
+                    style={{ background: cat.color }}
+                  />
+                  {name}
+                </span>
+              ))}
+            </div>
+          )}
           {qi < 3 && <div className="quarter-divider" />}
         </div>
       ))}

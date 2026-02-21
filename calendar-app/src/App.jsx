@@ -228,6 +228,7 @@ function App() {
             hoveredEvent={hoveredEvent}
             onEventHover={setHoveredEvent}
             searchQuery={searchQuery}
+            activeCategoryList={activeCategoryList}
           />
         )}
         {isMultiMonth && (
