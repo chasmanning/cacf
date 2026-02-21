@@ -1,8 +1,8 @@
 export const CATEGORIES = {
-  'Office Closed': { color: '#C0392B', textColor: '#fff' },
+  'Office Closed': { color: '#7D8C8E', textColor: '#fff' },
   'Events': { color: '#D35400', textColor: '#fff' },
   'Board/Committee': { color: '#2471A3', textColor: '#fff' },
-  'Communications': { color: '#7D8C8E', textColor: '#fff' },
+  'Communications': { color: '#C0392B', textColor: '#fff' },
   'Grants & Programs': { color: '#27AE60', textColor: '#fff' },
   'Scholarships': { color: '#AF7AC5', textColor: '#fff' },
   'Bama': { color: '#D4AC0D', textColor: '#333' },
