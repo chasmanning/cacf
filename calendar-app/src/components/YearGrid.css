@@ -23,39 +23,6 @@
   margin: 4px 0;
 }
 
-/* Legend after each quarter - hidden on screen, shown in print */
-.quarter-print-legend {
-  display: none;
-}
-
-@media print {
-  .quarter-print-legend {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2px 12px;
-    padding: 3px 0 1px;
-    border-top: 1px solid #ccc;
-    margin-top: 2px;
-  }
-
-  .quarter-legend-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 8px;
-    font-weight: 600;
-    color: #333;
-  }
-
-  .quarter-legend-swatch {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    border-radius: 2px;
-    flex-shrink: 0;
-  }
-}
-
 /* ========== Responsive ========== */
 @media (max-width: 900px) {
   .quarter-months {

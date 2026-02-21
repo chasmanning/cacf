@@ -325,6 +325,11 @@
     flex-shrink: 0;
   }
 
+  .print-agenda {
+    page-break-before: always;
+    break-before: page;
+  }
+
   .print-agenda-month {
     margin-bottom: 12px;
     break-inside: avoid;
