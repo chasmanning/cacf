@@ -58,13 +58,3 @@
   font-size: 11px;
   color: #888;
 }
-
-.tooltip-status.confirmed {
-  color: #27AE60;
-  font-weight: 600;
-}
-
-.tooltip-status.tentative {
-  color: #D4AC0D;
-  font-weight: 600;
-}

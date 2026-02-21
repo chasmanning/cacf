@@ -24,9 +24,6 @@ function Tooltip({ event, allEvents, x, y }) {
             </div>
             <div className="tooltip-row tooltip-meta">
               {ev.category}
-              {ev.status && ev.status !== 'nan' && (
-                <> · <span className={`tooltip-status ${ev.status?.toLowerCase()}`}>{ev.status}</span></>
-              )}
             </div>
           </div>
         );

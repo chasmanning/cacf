@@ -10,7 +10,6 @@ function ListView({ events, onEventClick }) {
     const sorted = [...events].sort((a, b) => {
       if (sortBy === 'date') return parseDate(a.startDate) - parseDate(b.startDate);
       if (sortBy === 'category') return a.category.localeCompare(b.category) || parseDate(a.startDate) - parseDate(b.startDate);
-      if (sortBy === 'status') return (a.status || '').localeCompare(b.status || '') || parseDate(a.startDate) - parseDate(b.startDate);
       return 0;
     });
 
@@ -30,7 +29,7 @@ function ListView({ events, onEventClick }) {
     <div className="list-view">
       <div className="list-controls">
         <span className="list-sort-label">Sort by:</span>
-        {['date', 'category', 'status'].map((s) => (
+        {['date', 'category'].map((s) => (
           <button
             key={s}
             className={`list-sort-btn ${sortBy === s ? 'active' : ''}`}
@@ -67,9 +66,6 @@ function ListRow({ event, onClick }) {
       <div className="list-name">{event.name}</div>
       <div className="list-cat-badge" style={{ backgroundColor: cat.color, color: cat.textColor }}>
         {event.category}
-      </div>
-      <div className={`list-status ${event.status?.toLowerCase()}`}>
-        {event.status === 'nan' ? '—' : event.status}
       </div>
     </div>
   );

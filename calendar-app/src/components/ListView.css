@@ -65,7 +65,7 @@
 
 .list-row {
   display: grid;
-  grid-template-columns: 160px 1fr 160px 100px;
+  grid-template-columns: 160px 1fr 160px;
   align-items: center;
   padding: 10px 20px;
   gap: 12px;
@@ -104,19 +104,6 @@
   white-space: nowrap;
 }
 
-.list-status {
-  font-size: 12px;
-  font-weight: 600;
-  text-align: right;
-}
-
-.list-status.confirmed {
-  color: #27AE60;
-}
-
-.list-status.tentative {
-  color: #D4AC0D;
-}
 
 /* ========== Responsive ========== */
 @media (max-width: 768px) {
@@ -157,7 +144,4 @@
     padding: 8px 10px;
   }
 
-  .list-status {
-    text-align: left;
-  }
 }
