@@ -455,10 +455,45 @@
     "status": "Confirmed"
   },
   {
+    "name": "Teacher Workday (No School)",
+    "category": "School Closed/Office Open",
+    "startDate": "2026-01-05",
+    "endDate": "2026-01-05",
+    "status": "Confirmed"
+  },
+  {
+    "name": "Professional Learning Day (No School)",
+    "category": "School Closed/Office Open",
+    "startDate": "2026-03-06",
+    "endDate": "2026-03-06",
+    "status": "Confirmed"
+  },
+  {
+    "name": "Teacher Workday (No School)",
+    "category": "School Closed/Office Open",
+    "startDate": "2026-03-20",
+    "endDate": "2026-03-20",
+    "status": "Confirmed"
+  },
+  {
     "name": "Spring Break Week",
     "category": "School Closed/Office Open",
     "startDate": "2026-04-06",
     "endDate": "2026-04-10",
+    "status": "Confirmed"
+  },
+  {
+    "name": "Indigenous Peoples Day (No School)",
+    "category": "School Closed/Office Open",
+    "startDate": "2026-10-12",
+    "endDate": "2026-10-12",
+    "status": "Confirmed"
+  },
+  {
+    "name": "Veterans Day (No School)",
+    "category": "School Closed/Office Open",
+    "startDate": "2026-11-11",
+    "endDate": "2026-11-11",
     "status": "Confirmed"
   },
   {
