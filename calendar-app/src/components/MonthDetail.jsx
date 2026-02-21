@@ -118,21 +118,17 @@ function MonthDetail({
                     )}
                     {isMulti && (
                       <div className="detail-event-bands">
-                        {evts.map((ev, i) => (
-                          <div key={i} className="detail-band" style={{ backgroundColor: CATEGORIES[ev.category]?.color }}>
-                            {i === 0 && day !== null && (
-                              <span
-                                className="detail-day-num"
-                                style={{ color: CATEGORIES[ev.category]?.textColor || '#fff' }}
-                              >
-                                {day}
-                              </span>
-                            )}
-                            <span className="detail-event-name" style={{ color: CATEGORIES[ev.category]?.textColor || '#fff' }}>
-                              {ev.name}
-                            </span>
-                          </div>
-                        ))}
+                        {evts.map((ev, i) => {
+                          const tc = CATEGORIES[ev.category]?.textColor || '#fff';
+                          return (
+                            <div key={i} className={`detail-band ${i === 0 ? 'detail-band-first' : ''}`} style={{ backgroundColor: CATEGORIES[ev.category]?.color }}>
+                              {i === 0 && day !== null && (
+                                <span className="detail-day-num" style={{ color: tc }}>{day}</span>
+                              )}
+                              <span className="detail-event-name" style={{ color: tc }}>{ev.name}</span>
+                            </div>
+                          );
+                        })}
                       </div>
                     )}
                   </div>
