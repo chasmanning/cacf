@@ -148,7 +148,7 @@ function MonthCell({
         <div className="month-notes">
           {notes.map((n, i) => (
             <span key={i} className="month-note" style={{ color: CATEGORIES[n.category]?.color }}>
-              {n.name}{n.status === 'Tentative' ? ' (T)' : ''}
+              {n.name}
               {i < notes.length - 1 ? ' · ' : ''}
             </span>
           ))}

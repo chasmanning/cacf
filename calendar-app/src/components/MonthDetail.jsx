@@ -146,7 +146,6 @@ function MonthDetail({
           {notes.map((n, i) => (
             <span key={i} className="detail-note" style={{ color: CATEGORIES[n.category]?.color }}>
               {n.name} ({formatDateRange(n.startDate, n.endDate)})
-              {n.status === 'Tentative' ? ' — Tentative' : ''}
               {i < notes.length - 1 ? ' · ' : ''}
             </span>
           ))}
