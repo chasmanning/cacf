@@ -254,7 +254,7 @@ function App() {
           />
         )}
       </main>
-      {/* Print-only legend and agenda */}
+      {/* Legend and agenda */}
       <div className="print-footer">
         <div className="print-legend">
           <div className="print-section-title">Legend</div>

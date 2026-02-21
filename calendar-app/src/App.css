@@ -178,9 +178,92 @@
   }
 }
 
-/* Print footer: hidden on screen */
+/* Agenda section: visible on screen and in print */
 .print-footer {
-  display: none;
+  margin-top: 32px;
+  padding-top: 16px;
+}
+
+.print-section-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--crimson);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+  border-bottom: 1.5px solid var(--crimson);
+}
+
+.print-legend {
+  margin-bottom: 20px;
+}
+
+.print-legend-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+}
+
+.print-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #333;
+}
+
+.print-legend-swatch {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.print-agenda-month {
+  margin-bottom: 16px;
+}
+
+.print-agenda-month-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: #444;
+  padding: 4px 0 3px;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 2px;
+}
+
+.print-agenda-item {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 3px 0;
+  font-size: 11px;
+  color: #333;
+  border-bottom: 1px solid #f2f0ed;
+}
+
+.print-cat-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  position: relative;
+  top: 1px;
+}
+
+.print-agenda-date {
+  flex-shrink: 0;
+  width: 120px;
+  color: #666;
+  font-variant-numeric: tabular-nums;
+}
+
+.print-agenda-name {
+  flex: 1;
 }
 
 /* Print-all section: hidden on screen */
@@ -280,49 +363,13 @@
     page-break-inside: avoid;
   }
 
-  /* Print footer: legend + event list */
+  /* Print footer overrides */
   .print-footer {
-    display: block !important;
-    page-break-before: auto;
     margin-top: 24px;
   }
 
-  .print-section-title {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--crimson);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 8px;
-    padding-bottom: 4px;
-    border-bottom: 1.5px solid var(--crimson);
-  }
-
-  .print-legend {
-    margin-bottom: 20px;
-  }
-
-  .print-legend-items {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px 16px;
-  }
-
   .print-legend-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
     font-size: 10px;
-    font-weight: 600;
-    color: #333;
-  }
-
-  .print-legend-swatch {
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    border-radius: 2px;
-    flex-shrink: 0;
   }
 
   .print-agenda {
@@ -336,44 +383,18 @@
     page-break-inside: avoid;
   }
 
-  .print-agenda-month-name {
-    font-size: 11px;
-    font-weight: 700;
-    color: #444;
-    padding: 4px 0 3px;
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 2px;
-  }
-
   .print-agenda-item {
-    display: flex;
-    align-items: baseline;
-    gap: 6px;
     padding: 2px 0;
     font-size: 9px;
-    color: #333;
-    border-bottom: 1px solid #f2f0ed;
   }
 
   .print-cat-dot {
-    display: inline-block;
     width: 7px;
     height: 7px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    position: relative;
-    top: 1px;
   }
 
   .print-agenda-date {
-    flex-shrink: 0;
     width: 110px;
-    color: #666;
-    font-variant-numeric: tabular-nums;
-  }
-
-  .print-agenda-name {
-    flex: 1;
   }
 
   /* ===== Print All Months mode ===== */
