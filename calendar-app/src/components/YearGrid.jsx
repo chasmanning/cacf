@@ -31,6 +31,19 @@ function YearGrid({ year, events, monthNotes, onMonthClick, onEventClick, hovere
               />
             ))}
           </div>
+          {activeCategoryList && (
+            <div className="quarter-print-legend">
+              {activeCategoryList.map(([name, cat]) => (
+                <span key={name} className="quarter-legend-item">
+                  <span
+                    className="quarter-legend-swatch"
+                    style={{ background: cat.color }}
+                  />
+                  {name}
+                </span>
+              ))}
+            </div>
+          )}
           {qi < 3 && <div className="quarter-divider" />}
         </div>
       ))}

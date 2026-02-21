@@ -88,29 +88,18 @@ function MonthCell({
                 const dimmed = hasEvents && searchQuery &&
                   !evts.some((ev) => ev.name.toLowerCase().includes(searchQuery.toLowerCase()));
 
-                let bgStyle = {};
-                if (evts.length === 1) {
-                  bgStyle = { backgroundColor: cat.color };
-                } else if (evts.length > 1) {
-                  const stops = evts.map((ev, i) => {
-                    const c = CATEGORIES[ev.category]?.color || '#999';
-                    const pct1 = (i / evts.length) * 100;
-                    const pct2 = ((i + 1) / evts.length) * 100;
-                    return `${c} ${pct1}%, ${c} ${pct2}%`;
-                  }).join(', ');
-                  bgStyle = { background: `linear-gradient(135deg, ${stops})` };
-                }
+                const isMulti = evts.length > 1;
 
                 return (
                   <div
                     key={di}
-                    className={`day-cell ${day === null ? 'empty' : ''} ${day !== null && isWeekend && !hasEvents ? 'weekend' : ''} ${hasEvents ? 'has-event' : ''} ${isHovered ? 'hovered' : ''} ${dimmed ? 'dimmed' : ''}`}
-                    style={hasEvents ? bgStyle : undefined}
+                    className={`day-cell ${day === null ? 'empty' : ''} ${day !== null && isWeekend && !hasEvents ? 'weekend' : ''} ${hasEvents ? 'has-event' : ''} ${isMulti ? 'multi-event' : ''} ${isHovered ? 'hovered' : ''} ${dimmed ? 'dimmed' : ''}`}
+                    style={hasEvents && !isMulti ? { backgroundColor: cat.color } : undefined}
                     onMouseEnter={day ? (e) => handleDayMouseEnter(day, e) : undefined}
                     onMouseLeave={day ? handleDayMouseLeave : undefined}
                     onClick={day ? (e) => handleDayClick(day, e) : undefined}
                   >
-                    {day !== null && (
+                    {day !== null && !isMulti && (
                       <span
                         className="day-num"
                         style={hasEvents ? { color: cat?.textColor || '#fff' } : undefined}
@@ -118,23 +107,33 @@ function MonthCell({
                         {day}
                       </span>
                     )}
-                    {showLabels && hasEvents && (
-                      <div className="cell-event-names">
+                    {isMulti && (
+                      <div className="event-bands">
                         {evts.map((ev, i) => {
                           const evCat = CATEGORIES[ev.category] || {};
                           return (
-                            <span
-                              key={i}
-                              className="cell-event-name"
-                              style={{ color: evts.length === 1 ? (cat?.textColor || '#fff') : (evCat.textColor || '#fff') }}
-                            >
-                              {ev.name}
-                            </span>
+                            <div key={i} className="event-band" style={{ backgroundColor: evCat.color }}>
+                              {i === 0 && day !== null && (
+                                <span className="day-num" style={{ color: evCat.textColor || '#fff' }}>{day}</span>
+                              )}
+                              {showLabels && (
+                                <span className="cell-event-name" style={{ color: evCat.textColor || '#fff' }}>
+                                  {ev.name}
+                                </span>
+                              )}
+                            </div>
                           );
                         })}
                       </div>
                     )}
-                    {!showLabels && evts.length > 1 && (
+                    {showLabels && hasEvents && !isMulti && (
+                      <div className="cell-event-names">
+                        <span className="cell-event-name" style={{ color: cat?.textColor || '#fff' }}>
+                          {primary.name}
+                        </span>
+                      </div>
+                    )}
+                    {!showLabels && isMulti && (
                       <span className="multi-dot">{evts.length}</span>
                     )}
                   </div>

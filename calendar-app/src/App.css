@@ -373,6 +373,10 @@
     margin-top: 24px;
   }
 
+  .print-legend {
+    display: none;
+  }
+
   .print-legend-item {
     font-size: 10px;
   }
