@@ -20,8 +20,8 @@
  * 4. Paste it below and set enabled: true
  */
 export const SHEET_CONFIG = {
-  enabled: false,
-  sheetId: '',
+  enabled: true,
+  sheetId: '1ieLxJ236GqVGJuLw7-XlNhk3UPNtUipsnDJfO2768gU',
   // Optional: specific tab name (leave empty for first tab)
   sheetName: '',
   // Auto-refresh interval in minutes (0 = load once on page open)
