@@ -127,7 +127,22 @@ function App() {
               </button>
             )}
           </div>
-          <button className="print-btn" onClick={() => window.print()}>
+          <button className="print-btn" onClick={() => {
+            const prev = document.title;
+            if (view === '1mo') {
+              document.title = `CACF Calendar - ${MONTH_NAMES[startMonth]} 2026`;
+            } else if (view === '2mo') {
+              const months = [startMonth, startMonth + 1].filter(m => m < 12);
+              document.title = `CACF Calendar - ${MONTH_NAMES[months[0]]}-${MONTH_NAMES[months[months.length - 1]]} 2026`;
+            } else if (view === '3mo') {
+              const months = [startMonth, startMonth + 1, startMonth + 2].filter(m => m < 12);
+              document.title = `CACF Calendar - ${MONTH_NAMES[months[0]]}-${MONTH_NAMES[months[months.length - 1]]} 2026`;
+            } else {
+              document.title = 'CACF Calendar - 2026';
+            }
+            window.print();
+            document.title = prev;
+          }}>
             <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
               <path fillRule="evenodd" d="M5 4v3H4a2 2 0 00-2 2v3a2 2 0 002 2h1v2a2 2 0 002 2h6a2 2 0 002-2v-2h1a2 2 0 002-2V9a2 2 0 00-2-2h-1V4a2 2 0 00-2-2H7a2 2 0 00-2 2zm8 0H7v3h6V4zm0 8H7v4h6v-4z" clipRule="evenodd" />
             </svg>
