@@ -321,20 +321,26 @@ function App() {
                   ))}
                 </div>
               )}
-              <div className="print-all-legend">
-                <div className="print-section-title">Legend</div>
-                <div className="print-legend-items">
-                  {activeCategoryList.map(([name, cat]) => (
-                    <span key={name} className="print-legend-item">
-                      <span
-                        className="print-legend-swatch"
-                        style={{ background: cat.color }}
-                      />
-                      {name}
-                    </span>
-                  ))}
-                </div>
-              </div>
+              {(() => {
+                const monthCats = [...new Set(allMonthsAgenda[month].events.map((ev) => ev.category))];
+                if (monthCats.length === 0) return null;
+                return (
+                  <div className="print-all-legend">
+                    <div className="print-section-title">Legend</div>
+                    <div className="print-legend-items">
+                      {monthCats.map((name) => (
+                        <span key={name} className="print-legend-item">
+                          <span
+                            className="print-legend-swatch"
+                            style={{ background: CATEGORIES[name]?.color }}
+                          />
+                          {name}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })()}
             </div>
           ))}
         </div>
