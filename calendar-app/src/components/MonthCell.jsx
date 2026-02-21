@@ -4,6 +4,22 @@ import { getWeeksForMonth, eventOverlapsMonth, getEventSpanForMonth, daysBetween
 import Tooltip from './Tooltip';
 import './MonthCell.css';
 
+function getDiagClipPath(index, total) {
+  if (total === 2) {
+    return index === 0
+      ? 'polygon(0 0, 100% 0, 0 100%)'
+      : 'polygon(100% 0, 100% 100%, 0 100%)';
+  }
+  if (total === 3) {
+    if (index === 0) return 'polygon(0 0, 66.67% 0, 0 66.67%)';
+    if (index === 1) return 'polygon(66.67% 0, 100% 0, 100% 33.33%, 33.33% 100%, 0 100%, 0 66.67%)';
+    return 'polygon(100% 33.33%, 100% 100%, 33.33% 100%)';
+  }
+  const top = (index / total) * 100;
+  const bottom = ((index + 1) / total) * 100;
+  return `polygon(0 ${top}%, 100% ${top}%, 100% ${bottom}%, 0 ${bottom}%)`;
+}
+
 function MonthCell({
   year, month, events, monthNotes, onMonthClick,
   onEventClick, hoveredEvent, onEventHover, searchQuery, size = 'sm'
@@ -90,32 +106,29 @@ function MonthCell({
 
                 const isMulti = evts.length > 1;
 
-                let bgStyle = {};
-                if (evts.length === 1) {
-                  bgStyle = { backgroundColor: cat.color };
-                } else if (isMulti) {
-                  const stops = evts.map((ev, i) => {
-                    const c = CATEGORIES[ev.category]?.color || '#999';
-                    const pct1 = (i / evts.length) * 100;
-                    const pct2 = ((i + 1) / evts.length) * 100;
-                    return `${c} ${pct1}%, ${c} ${pct2}%`;
-                  }).join(', ');
-                  bgStyle = { background: `linear-gradient(to bottom right, ${stops})` };
-                }
-
                 return (
                   <div
                     key={di}
                     className={`day-cell ${day === null ? 'empty' : ''} ${day !== null && isWeekend && !hasEvents ? 'weekend' : ''} ${hasEvents ? 'has-event' : ''} ${isHovered ? 'hovered' : ''} ${dimmed ? 'dimmed' : ''}`}
-                    style={hasEvents ? bgStyle : undefined}
+                    style={hasEvents && !isMulti ? { backgroundColor: cat.color } : undefined}
                     onMouseEnter={day ? (e) => handleDayMouseEnter(day, e) : undefined}
                     onMouseLeave={day ? handleDayMouseLeave : undefined}
                     onClick={day ? (e) => handleDayClick(day, e) : undefined}
                   >
+                    {isMulti && evts.map((ev, i) => (
+                      <div
+                        key={`s${i}`}
+                        className="diag-slice"
+                        style={{
+                          backgroundColor: CATEGORIES[ev.category]?.color || '#999',
+                          clipPath: getDiagClipPath(i, evts.length),
+                        }}
+                      />
+                    ))}
                     {day !== null && (
                       <span
                         className="day-num"
-                        style={hasEvents ? { color: cat?.textColor || '#fff' } : undefined}
+                        style={hasEvents ? { color: '#fff' } : undefined}
                       >
                         {day}
                       </span>

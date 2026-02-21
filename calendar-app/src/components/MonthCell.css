@@ -95,6 +95,12 @@
   opacity: 0.25;
 }
 
+.diag-slice {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
 .day-num {
   font-size: 10px;
   color: #666;
@@ -279,7 +285,8 @@
     padding: 2px 1px;
   }
 
-  .month-cell.size-sm .day-cell.has-event {
+  .month-cell.size-sm .day-cell.has-event,
+  .month-cell.size-sm .diag-slice {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
