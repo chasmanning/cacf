@@ -20,16 +20,13 @@ function Tooltip({ event, allEvents, x, y }) {
               <span className="tooltip-name">{ev.name}</span>
             </div>
             <div className="tooltip-row">
-              <span className="tooltip-label">Category:</span> {ev.category}
+              {formatDateRange(ev.startDate, ev.endDate)}
             </div>
-            <div className="tooltip-row">
-              <span className="tooltip-label">Date:</span> {formatDateRange(ev.startDate, ev.endDate)}
-            </div>
-            <div className="tooltip-row">
-              <span className="tooltip-label">Status:</span>
-              <span className={`tooltip-status ${ev.status?.toLowerCase()}`}>
-                {ev.status === 'nan' ? '—' : ev.status}
-              </span>
+            <div className="tooltip-row tooltip-meta">
+              {ev.category}
+              {ev.status && ev.status !== 'nan' && (
+                <> · <span className={`tooltip-status ${ev.status?.toLowerCase()}`}>{ev.status}</span></>
+              )}
             </div>
           </div>
         );

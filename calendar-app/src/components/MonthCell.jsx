@@ -98,7 +98,10 @@ function MonthCell({
                     const pct2 = ((i + 1) / evts.length) * 100;
                     return `${c} ${pct1}%, ${c} ${pct2}%`;
                   }).join(', ');
-                  bgStyle = { background: `linear-gradient(135deg, ${stops})` };
+                  bgStyle = {
+                    backgroundColor: CATEGORIES[evts[0].category]?.color || '#999',
+                    backgroundImage: `linear-gradient(135deg, ${stops})`,
+                  };
                 }
 
                 return (

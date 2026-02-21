@@ -279,6 +279,11 @@
     padding: 2px 1px;
   }
 
+  .month-cell.size-sm .day-cell.has-event {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
   .month-cell.size-sm .month-header {
     padding: 5px 8px;
     font-size: 12px;
@@ -299,6 +304,13 @@
 
   .month-cell.size-sm .day-num {
     font-size: 9px;
+  }
+
+  .month-cell.size-sm .multi-dot {
+    font-size: 6px;
+    line-height: 9px;
+    bottom: 0;
+    right: 0;
   }
 
   .month-cell.size-sm .month-notes {
