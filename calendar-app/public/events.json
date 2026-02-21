@@ -79,6 +79,13 @@
   {
     "name": "EC",
     "category": "Board/Committee",
+    "startDate": "2026-05-28",
+    "endDate": "2026-05-28",
+    "status": "Confirmed"
+  },
+  {
+    "name": "EC",
+    "category": "Board/Committee",
     "startDate": "2026-08-25",
     "endDate": "2026-08-25",
     "status": "Confirmed"
