@@ -1,6 +1,8 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { CATEGORIES, MONTH_NAMES } from './constants';
 import { isMonthLevel, formatDateRange, parseDate, eventOverlapsMonth } from './utils';
+import { loadEvents } from './sheetLoader';
+import { SHEET_CONFIG } from './config';
 import Header from './components/Header';
 import FilterBar from './components/FilterBar';
 import YearGrid from './components/YearGrid';
@@ -23,10 +25,14 @@ function App() {
   const [printAllMonths, setPrintAllMonths] = useState(false);
 
   useEffect(() => {
-    fetch('/events.json')
-      .then((r) => r.json())
-      .then(setEvents)
-      .catch(console.error);
+    loadEvents().then(setEvents).catch(console.error);
+
+    if (SHEET_CONFIG.enabled && SHEET_CONFIG.refreshMinutes > 0) {
+      const id = setInterval(() => {
+        loadEvents().then(setEvents).catch(console.error);
+      }, SHEET_CONFIG.refreshMinutes * 60 * 1000);
+      return () => clearInterval(id);
+    }
   }, []);
 
   const filteredEvents = useMemo(() => {

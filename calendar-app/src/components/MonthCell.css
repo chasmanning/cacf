@@ -104,36 +104,6 @@
   z-index: 1;
 }
 
-/* Multi-event horizontal bands */
-.day-cell.multi-event {
-  padding: 0;
-  overflow: hidden;
-}
-
-.event-bands {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  flex: 1;
-  min-height: inherit;
-  border-radius: inherit;
-  overflow: hidden;
-}
-
-.event-band {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 0;
-}
-
-.month-cell.size-md .event-band,
-.month-cell.size-lg .event-band {
-  justify-content: flex-start;
-  padding: 0 3px;
-}
-
 .multi-dot {
   position: absolute;
   bottom: 1px;
