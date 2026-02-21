@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { CATEGORIES, MONTH_NAMES } from './constants';
 import { isMonthLevel, formatDateRange, parseDate, eventOverlapsMonth } from './utils';
 import Header from './components/Header';
@@ -19,6 +19,7 @@ function App() {
   const [startMonth, setStartMonth] = useState(0);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [hoveredEvent, setHoveredEvent] = useState(null);
+  const [printAllMonths, setPrintAllMonths] = useState(false);
 
   useEffect(() => {
     fetch('/events.json')
@@ -97,11 +98,37 @@ function App() {
       .filter((g) => g.events.length > 0);
   }, [filteredEvents, visibleMonths]);
 
+  const handlePrintAll = useCallback(() => {
+    setPrintAllMonths(true);
+  }, []);
+
+  useEffect(() => {
+    if (!printAllMonths) return;
+    const prev = document.title;
+    document.title = 'CACF Calendar - All Months 2026';
+    // Wait a frame so the print-all section renders before printing
+    requestAnimationFrame(() => {
+      window.print();
+      document.title = prev;
+      setPrintAllMonths(false);
+    });
+  }, [printAllMonths]);
+
+  const allMonthsAgenda = useMemo(() => {
+    return Array.from({ length: 12 }, (_, i) => i)
+      .map((month) => {
+        const monthEvents = filteredEvents
+          .filter((ev) => eventOverlapsMonth(ev, 2026, month))
+          .sort((a, b) => parseDate(a.startDate) - parseDate(b.startDate));
+        return { month, events: monthEvents };
+      });
+  }, [filteredEvents]);
+
   const isMultiMonth = view === '1mo' || view === '2mo' || view === '3mo';
   const monthCount = view === '1mo' ? 1 : view === '2mo' ? 2 : view === '3mo' ? 3 : 0;
 
   return (
-    <div className="app">
+    <div className={`app${printAllMonths ? ' printing-all' : ''}`}>
       <Header />
       <div className="controls">
         <FilterBar
@@ -147,6 +174,12 @@ function App() {
               <path fillRule="evenodd" d="M5 4v3H4a2 2 0 00-2 2v3a2 2 0 002 2h1v2a2 2 0 002 2h6a2 2 0 002-2v-2h1a2 2 0 002-2V9a2 2 0 00-2-2h-1V4a2 2 0 00-2-2H7a2 2 0 00-2 2zm8 0H7v3h6V4zm0 8H7v4h6v-4z" clipRule="evenodd" />
             </svg>
             Print PDF
+          </button>
+          <button className="print-btn print-all-btn" onClick={handlePrintAll}>
+            <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+              <path fillRule="evenodd" d="M5 4v3H4a2 2 0 00-2 2v3a2 2 0 002 2h1v2a2 2 0 002 2h6a2 2 0 002-2v-2h1a2 2 0 002-2V9a2 2 0 00-2-2h-1V4a2 2 0 00-2-2H7a2 2 0 00-2 2zm8 0H7v3h6V4zm0 8H7v4h6v-4z" clipRule="evenodd" />
+            </svg>
+            Print All Months
           </button>
           <div className="view-toggles">
             <button
@@ -255,6 +288,55 @@ function App() {
           ))}
         </div>
       </div>
+      {/* Print All Months: one MonthDetail per page with its agenda */}
+      {printAllMonths && (
+        <div className="print-all-section">
+          {Array.from({ length: 12 }, (_, i) => i).map((month) => (
+            <div key={month} className="print-all-page">
+              <MonthDetail
+                year={2026}
+                month={month}
+                events={calendarEvents}
+                monthNotes={monthNotes}
+                onEventClick={() => {}}
+                hoveredEvent={null}
+                onEventHover={() => {}}
+              />
+              {allMonthsAgenda[month].events.length > 0 && (
+                <div className="print-all-agenda">
+                  <div className="print-section-title">Events — {MONTH_NAMES[month]}</div>
+                  {allMonthsAgenda[month].events.map((ev, i) => (
+                    <div key={i} className="print-agenda-item">
+                      <span
+                        className="print-cat-dot"
+                        style={{ background: CATEGORIES[ev.category]?.color }}
+                      />
+                      <span className="print-agenda-date">
+                        {formatDateRange(ev.startDate, ev.endDate)}
+                      </span>
+                      <span className="print-agenda-name">{ev.name}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+          <div className="print-all-legend">
+            <div className="print-section-title">Legend</div>
+            <div className="print-legend-items">
+              {activeCategoryList.map(([name, cat]) => (
+                <span key={name} className="print-legend-item">
+                  <span
+                    className="print-legend-swatch"
+                    style={{ background: cat.color }}
+                  />
+                  {name}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
       {selectedEvent && (
         <EventModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />
       )}

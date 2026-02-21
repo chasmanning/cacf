@@ -183,6 +183,11 @@
   display: none;
 }
 
+/* Print-all section: hidden on screen */
+.print-all-section {
+  display: none;
+}
+
 /* ========== Print / PDF ========== */
 @media print {
   /* Force background colors to print */
@@ -364,6 +369,37 @@
 
   .print-agenda-name {
     flex: 1;
+  }
+
+  /* ===== Print All Months mode ===== */
+  .printing-all .main-content,
+  .printing-all .print-footer,
+  .printing-all .header {
+    display: none !important;
+  }
+
+  .printing-all .print-all-section {
+    display: block !important;
+  }
+
+  .print-all-page {
+    page-break-after: always;
+    break-after: page;
+  }
+
+  .print-all-page:last-of-type {
+    page-break-after: auto;
+    break-after: auto;
+  }
+
+  .print-all-agenda {
+    margin-top: 16px;
+    border-top: 1px solid #e8e4de;
+    padding-top: 8px;
+  }
+
+  .print-all-legend {
+    margin-top: 24px;
   }
 
   /* Page setup hint (landscape works best for year view) */
