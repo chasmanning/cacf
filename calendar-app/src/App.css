@@ -230,19 +230,19 @@
 
   /* Keep header compact */
   .header {
-    padding: 12px 0 8px;
-    margin-bottom: 8px;
+    padding: 8px 0 4px;
+    margin-bottom: 4px;
   }
 
   /* Year grid: keep 3 columns, tighten spacing */
   .quarter-months {
     grid-template-columns: repeat(3, 1fr) !important;
-    gap: 10px;
-    padding: 8px 0;
+    gap: 8px;
+    padding: 4px 0;
   }
 
   .quarter-divider {
-    margin: 2px 0;
+    margin: 1px 0;
   }
 
   /* Prevent months from splitting across pages */
@@ -404,6 +404,6 @@
 
   /* Page setup hint (landscape works best for year view) */
   @page {
-    margin: 0.5in;
+    margin: 0.35in;
   }
 }
