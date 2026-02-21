@@ -73,6 +73,7 @@
 
 .detail-day-cell {
   min-height: 80px;
+  min-width: 0;
   padding: 6px 8px;
   background: var(--day-bg);
   border-radius: 4px;
@@ -80,6 +81,7 @@
   transition: transform 0.12s, box-shadow 0.12s;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .detail-day-cell.empty {
@@ -114,6 +116,8 @@
   flex-direction: column;
   gap: 1px;
   flex: 1;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .detail-event-name {
