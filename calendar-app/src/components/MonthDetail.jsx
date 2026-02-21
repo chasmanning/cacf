@@ -96,12 +96,12 @@ function MonthDetail({
                   <div
                     key={di}
                     className={`detail-day-cell ${day === null ? 'empty' : ''} ${day !== null && isWeekend && !hasEvents ? 'weekend' : ''} ${hasEvents ? 'has-event' : ''} ${isMulti ? 'multi-event' : ''} ${isHovered ? 'hovered' : ''}`}
-                    style={hasEvents && !isMulti ? { backgroundColor: cat.color } : isMulti ? { backgroundColor: CATEGORIES[evts[0].category]?.color } : undefined}
+                    style={hasEvents && !isMulti ? { backgroundColor: cat.color } : undefined}
                     onMouseEnter={day ? (e) => handleDayMouseEnter(day, e) : undefined}
                     onMouseLeave={day ? handleDayMouseLeave : undefined}
                     onClick={day ? (e) => handleDayClick(day, e) : undefined}
                   >
-                    {day !== null && (
+                    {day !== null && !isMulti && (
                       <span
                         className="detail-day-num"
                         style={hasEvents ? { color: cat?.textColor || '#fff' } : undefined}
@@ -118,13 +118,16 @@ function MonthDetail({
                     )}
                     {isMulti && (
                       <div className="detail-event-bands">
-                        <div className="detail-band" style={{ backgroundColor: CATEGORIES[evts[0].category]?.color }}>
-                          <span className="detail-event-name" style={{ color: CATEGORIES[evts[0].category]?.textColor || '#fff' }}>
-                            {evts[0].name}
-                          </span>
-                        </div>
-                        {evts.slice(1).map((ev, i) => (
+                        {evts.map((ev, i) => (
                           <div key={i} className="detail-band" style={{ backgroundColor: CATEGORIES[ev.category]?.color }}>
+                            {i === 0 && day !== null && (
+                              <span
+                                className="detail-day-num"
+                                style={{ color: CATEGORIES[ev.category]?.textColor || '#fff' }}
+                              >
+                                {day}
+                              </span>
+                            )}
                             <span className="detail-event-name" style={{ color: CATEGORIES[ev.category]?.textColor || '#fff' }}>
                               {ev.name}
                             </span>
