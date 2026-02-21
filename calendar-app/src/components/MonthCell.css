@@ -275,34 +275,34 @@
 
 @media print {
   .month-cell.size-sm .day-cell {
-    min-height: 16px;
-    padding: 1px;
+    min-height: 19px;
+    padding: 2px 1px;
   }
 
   .month-cell.size-sm .month-header {
-    padding: 3px 8px;
-    font-size: 11px;
+    padding: 5px 8px;
+    font-size: 12px;
   }
 
   .month-cell.size-sm .month-body {
-    padding: 2px;
+    padding: 3px;
   }
 
   .month-cell.size-sm .day-name {
-    font-size: 7px;
-    padding: 1px 0;
+    font-size: 8px;
+    padding: 2px 0;
   }
 
   .month-cell.size-sm .day-names {
-    margin-bottom: 0;
+    margin-bottom: 1px;
   }
 
   .month-cell.size-sm .day-num {
-    font-size: 8px;
+    font-size: 9px;
   }
 
   .month-cell.size-sm .month-notes {
-    font-size: 7px;
-    padding: 2px 6px;
+    font-size: 8px;
+    padding: 3px 6px;
   }
 }
