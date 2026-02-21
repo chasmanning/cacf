@@ -266,30 +266,6 @@
   flex: 1;
 }
 
-/* Print wrapper: on screen, behaves as normal block layout */
-.print-wrapper {
-  width: 100%;
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-.print-wrapper,
-.print-wrapper > tbody,
-.print-wrapper > tbody > tr,
-.print-wrapper > tbody > tr > td {
-  display: block;
-}
-
-.print-wrapper > thead {
-  display: none;
-}
-
-.print-page-legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2px 12px;
-}
-
 /* Print-all section: hidden on screen */
 .print-all-section {
   display: none;
@@ -392,52 +368,6 @@
     margin-top: 24px;
   }
 
-  .print-legend {
-    display: none;
-  }
-
-  /* Repeating legend via table-header-group */
-  .print-wrapper {
-    display: table;
-    width: 100%;
-  }
-
-  .print-wrapper > thead {
-    display: table-header-group;
-  }
-
-  .print-wrapper > thead > tr {
-    display: table-row;
-  }
-
-  .print-wrapper > thead > tr > td {
-    display: table-cell;
-    padding: 0 0 4px;
-    border-bottom: 1px solid #ddd;
-  }
-
-  .print-wrapper > thead .print-legend-item {
-    font-size: 8px;
-  }
-
-  .print-wrapper > thead .print-legend-swatch {
-    width: 10px;
-    height: 10px;
-  }
-
-  .print-wrapper > tbody {
-    display: table-row-group;
-  }
-
-  .print-wrapper > tbody > tr {
-    display: table-row;
-  }
-
-  .print-wrapper > tbody > tr > td {
-    display: table-cell;
-    padding: 0;
-  }
-
   .print-agenda {
     page-break-before: always;
     break-before: page;
@@ -464,7 +394,8 @@
   }
 
   /* ===== Print All Months mode ===== */
-  .printing-all .print-wrapper,
+  .printing-all .main-content,
+  .printing-all .print-footer,
   .printing-all .header {
     display: none !important;
   }

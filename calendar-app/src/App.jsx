@@ -223,101 +223,80 @@ function App() {
           </div>
         </div>
       </div>
-      <table className="print-wrapper">
-        <thead>
-          <tr><td>
-            <div className="print-page-legend">
-              {activeCategoryList.map(([name, cat]) => (
-                <span key={name} className="print-legend-item">
+      <main className="main-content">
+        {view === 'year' && (
+          <YearGrid
+            year={2026}
+            events={calendarEvents}
+            monthNotes={monthNotes}
+            onMonthClick={handleMonthClick}
+            onEventClick={setSelectedEvent}
+            hoveredEvent={hoveredEvent}
+            onEventHover={setHoveredEvent}
+            searchQuery={searchQuery}
+            activeCategoryList={activeCategoryList}
+          />
+        )}
+        {isMultiMonth && (
+          <MultiMonthView
+            year={2026}
+            count={monthCount}
+            startMonth={startMonth}
+            onStartMonthChange={setStartMonth}
+            events={calendarEvents}
+            monthNotes={monthNotes}
+            onMonthClick={handleMonthClick}
+            onEventClick={setSelectedEvent}
+            hoveredEvent={hoveredEvent}
+            onEventHover={setHoveredEvent}
+            searchQuery={searchQuery}
+            onBackToYear={handleBackToYear}
+          />
+        )}
+        {view === 'list' && (
+          <ListView
+            events={filteredEvents}
+            onEventClick={setSelectedEvent}
+          />
+        )}
+      </main>
+      {/* Legend and agenda */}
+      <div className="print-footer">
+        <div className="print-legend">
+          <div className="print-section-title">Legend</div>
+          <div className="print-legend-items">
+            {activeCategoryList.map(([name, cat]) => (
+              <span key={name} className="print-legend-item">
+                <span
+                  className="print-legend-swatch"
+                  style={{ background: cat.color }}
+                />
+                {name}
+              </span>
+            ))}
+          </div>
+        </div>
+        <div className="print-agenda">
+          <div className="print-section-title">Agenda</div>
+          {printAgenda.map(({ month, events: monthEvents }) => (
+            <div key={month} className="print-agenda-month">
+              <div className="print-agenda-month-name">{MONTH_NAMES[month]}</div>
+              {monthEvents.map((ev, i) => (
+                <div key={i} className="print-agenda-item">
                   <span
-                    className="print-legend-swatch"
-                    style={{ background: cat.color }}
+                    className="print-cat-dot"
+                    style={{ background: CATEGORIES[ev.category]?.color }}
                   />
-                  {name}
-                </span>
+                  <span className="print-agenda-date">
+                    {formatDateRange(ev.startDate, ev.endDate)}
+                  </span>
+                  <span className="print-agenda-name">{ev.name}</span>
+                </div>
               ))}
             </div>
-          </td></tr>
-        </thead>
-        <tbody>
-          <tr><td>
-            <main className="main-content">
-              {view === 'year' && (
-                <YearGrid
-                  year={2026}
-                  events={calendarEvents}
-                  monthNotes={monthNotes}
-                  onMonthClick={handleMonthClick}
-                  onEventClick={setSelectedEvent}
-                  hoveredEvent={hoveredEvent}
-                  onEventHover={setHoveredEvent}
-                  searchQuery={searchQuery}
-                  activeCategoryList={activeCategoryList}
-                />
-              )}
-              {isMultiMonth && (
-                <MultiMonthView
-                  year={2026}
-                  count={monthCount}
-                  startMonth={startMonth}
-                  onStartMonthChange={setStartMonth}
-                  events={calendarEvents}
-                  monthNotes={monthNotes}
-                  onMonthClick={handleMonthClick}
-                  onEventClick={setSelectedEvent}
-                  hoveredEvent={hoveredEvent}
-                  onEventHover={setHoveredEvent}
-                  searchQuery={searchQuery}
-                  onBackToYear={handleBackToYear}
-                />
-              )}
-              {view === 'list' && (
-                <ListView
-                  events={filteredEvents}
-                  onEventClick={setSelectedEvent}
-                />
-              )}
-            </main>
-            {/* Legend and agenda */}
-            <div className="print-footer">
-              <div className="print-legend">
-                <div className="print-section-title">Legend</div>
-                <div className="print-legend-items">
-                  {activeCategoryList.map(([name, cat]) => (
-                    <span key={name} className="print-legend-item">
-                      <span
-                        className="print-legend-swatch"
-                        style={{ background: cat.color }}
-                      />
-                      {name}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <div className="print-agenda">
-                <div className="print-section-title">Agenda</div>
-                {printAgenda.map(({ month, events: monthEvents }) => (
-                  <div key={month} className="print-agenda-month">
-                    <div className="print-agenda-month-name">{MONTH_NAMES[month]}</div>
-                    {monthEvents.map((ev, i) => (
-                      <div key={i} className="print-agenda-item">
-                        <span
-                          className="print-cat-dot"
-                          style={{ background: CATEGORIES[ev.category]?.color }}
-                        />
-                        <span className="print-agenda-date">
-                          {formatDateRange(ev.startDate, ev.endDate)}
-                        </span>
-                        <span className="print-agenda-name">{ev.name}</span>
-                      </div>
-                    ))}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </td></tr>
-        </tbody>
-      </table>
+          ))}
+        </div>
+      </div>
       {/* Print All Months: one MonthDetail per page with its agenda */}
       {printAllMonths && (
         <div className="print-all-section">
