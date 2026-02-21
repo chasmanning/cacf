@@ -183,6 +183,12 @@ function App() {
             </svg>
             Print All Months
           </button>
+          <a className="print-btn" href="/mockup.html" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+            <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+              <path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm2 3h8v2H6V6zm0 4h8v2H6v-2z" />
+            </svg>
+            View Mockups
+          </a>
           <div className="view-toggles">
             <button
               className={view === '1mo' ? 'active' : ''}
