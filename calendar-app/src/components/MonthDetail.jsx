@@ -90,24 +90,13 @@ function MonthDetail({
                 const isHovered = hasEvents && hoveredEvent &&
                   evts.some((ev) => ev.name === hoveredEvent.name && ev.startDate === hoveredEvent.startDate);
 
-                let bgStyle = {};
-                if (evts.length === 1) {
-                  bgStyle = { backgroundColor: cat.color };
-                } else if (evts.length > 1) {
-                  const stops = evts.map((ev, i) => {
-                    const c = CATEGORIES[ev.category]?.color || '#999';
-                    const pct1 = (i / evts.length) * 100;
-                    const pct2 = ((i + 1) / evts.length) * 100;
-                    return `${c} ${pct1}%, ${c} ${pct2}%`;
-                  }).join(', ');
-                  bgStyle = { background: `linear-gradient(135deg, ${stops})` };
-                }
+                const isMulti = evts.length > 1;
 
                 return (
                   <div
                     key={di}
-                    className={`detail-day-cell ${day === null ? 'empty' : ''} ${day !== null && isWeekend && !hasEvents ? 'weekend' : ''} ${hasEvents ? 'has-event' : ''} ${isHovered ? 'hovered' : ''}`}
-                    style={hasEvents ? bgStyle : undefined}
+                    className={`detail-day-cell ${day === null ? 'empty' : ''} ${day !== null && isWeekend && !hasEvents ? 'weekend' : ''} ${hasEvents ? 'has-event' : ''} ${isMulti ? 'multi-event' : ''} ${isHovered ? 'hovered' : ''}`}
+                    style={hasEvents && !isMulti ? { backgroundColor: cat.color } : isMulti ? { backgroundColor: CATEGORIES[evts[0].category]?.color } : undefined}
                     onMouseEnter={day ? (e) => handleDayMouseEnter(day, e) : undefined}
                     onMouseLeave={day ? handleDayMouseLeave : undefined}
                     onClick={day ? (e) => handleDayClick(day, e) : undefined}
@@ -120,16 +109,26 @@ function MonthDetail({
                         {day}
                       </span>
                     )}
-                    {hasEvents && (
+                    {hasEvents && !isMulti && (
                       <div className="detail-event-names">
-                        {evts.map((ev, i) => (
-                          <span
-                            key={i}
-                            className="detail-event-name"
-                            style={{ color: evts.length === 1 ? cat?.textColor || '#fff' : CATEGORIES[ev.category]?.textColor || '#fff' }}
-                          >
-                            {ev.name}
+                        <span className="detail-event-name" style={{ color: cat?.textColor || '#fff' }}>
+                          {evts[0].name}
+                        </span>
+                      </div>
+                    )}
+                    {isMulti && (
+                      <div className="detail-event-bands">
+                        <div className="detail-band" style={{ backgroundColor: CATEGORIES[evts[0].category]?.color }}>
+                          <span className="detail-event-name" style={{ color: CATEGORIES[evts[0].category]?.textColor || '#fff' }}>
+                            {evts[0].name}
                           </span>
+                        </div>
+                        {evts.slice(1).map((ev, i) => (
+                          <div key={i} className="detail-band" style={{ backgroundColor: CATEGORIES[ev.category]?.color }}>
+                            <span className="detail-event-name" style={{ color: CATEGORIES[ev.category]?.textColor || '#fff' }}>
+                              {ev.name}
+                            </span>
+                          </div>
                         ))}
                       </div>
                     )}
