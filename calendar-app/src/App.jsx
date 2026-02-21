@@ -5,6 +5,7 @@ import Header from './components/Header';
 import FilterBar from './components/FilterBar';
 import YearGrid from './components/YearGrid';
 import MultiMonthView from './components/MultiMonthView';
+import MonthDetail from './components/MonthDetail';
 import ListView from './components/ListView';
 import EventModal from './components/EventModal';
 import './App.css';
@@ -106,12 +107,13 @@ function App() {
     if (!printAllMonths) return;
     const prev = document.title;
     document.title = 'CACF Calendar - All Months 2026';
-    // Wait a frame so the print-all section renders before printing
-    requestAnimationFrame(() => {
+    // Give the browser time to render the print-all section
+    const timer = setTimeout(() => {
       window.print();
       document.title = prev;
       setPrintAllMonths(false);
-    });
+    }, 100);
+    return () => clearTimeout(timer);
   }, [printAllMonths]);
 
   const allMonthsAgenda = useMemo(() => {
