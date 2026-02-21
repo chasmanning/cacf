@@ -145,7 +145,7 @@ function MonthDetail({
           <span className="detail-notes-label">Notes: </span>
           {notes.map((n, i) => (
             <span key={i} className="detail-note" style={{ color: CATEGORIES[n.category]?.color }}>
-              {n.name} ({formatDateRange(n.startDate, n.endDate)})
+              {n.name}<span className="detail-note-date"> ({formatDateRange(n.startDate, n.endDate)})</span>
               {i < notes.length - 1 ? ' · ' : ''}
             </span>
           ))}

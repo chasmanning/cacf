@@ -413,6 +413,10 @@
     break-after: page;
   }
 
+  .detail-note-date {
+    display: none !important;
+  }
+
   .print-all-page:last-of-type {
     page-break-after: auto;
     break-after: auto;
