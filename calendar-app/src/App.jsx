@@ -271,6 +271,19 @@ function App() {
           </div>
         </div>
         <div className="print-agenda">
+          <div className="print-agenda-legend">
+            <div className="print-legend-items">
+              {activeCategoryList.map(([name, cat]) => (
+                <span key={name} className="print-legend-item">
+                  <span
+                    className="print-legend-swatch"
+                    style={{ background: cat.color }}
+                  />
+                  {name}
+                </span>
+              ))}
+            </div>
+          </div>
           <div className="print-section-title">Agenda</div>
           {printAgenda.map(({ month, events: monthEvents }) => (
             <div key={month} className="print-agenda-month">

@@ -266,6 +266,11 @@
   flex: 1;
 }
 
+/* Agenda legend: hidden on screen, shown in print */
+.print-agenda-legend {
+  display: none;
+}
+
 /* Print-all section: hidden on screen */
 .print-all-section {
   display: none;
@@ -375,6 +380,11 @@
   .print-agenda {
     page-break-before: always;
     break-before: page;
+  }
+
+  .print-agenda-legend {
+    display: block;
+    margin-bottom: 12px;
   }
 
   .print-agenda-month {
