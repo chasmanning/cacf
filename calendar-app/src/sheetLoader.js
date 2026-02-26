@@ -106,6 +106,6 @@ export async function loadEvents() {
     }
   }
 
-  const res = await fetch('/events.json');
+  const res = await fetch(`${import.meta.env.BASE_URL}events.json`);
   return res.json();
 }
