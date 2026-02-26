@@ -1,0 +1,441 @@
+.app {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px 48px;
+}
+
+/* Controls area */
+.controls {
+  margin-bottom: 24px;
+}
+
+.controls-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+/* Search */
+.search-box {
+  position: relative;
+  flex: 0 1 320px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 8px 12px 8px 36px;
+  border: 1px solid #d1ccc5;
+  border-radius: 6px;
+  font-size: 14px;
+  background: #fff;
+  color: #333;
+  transition: border-color 0.2s;
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: var(--crimson);
+  box-shadow: 0 0 0 2px rgba(161, 30, 33, 0.12);
+}
+
+.search-box input::placeholder {
+  color: #aaa;
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+  pointer-events: none;
+}
+
+.clear-search {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #999;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 6px;
+  line-height: 1;
+}
+
+.clear-search:hover {
+  color: #333;
+}
+
+/* Print button */
+.print-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--crimson);
+  background: #fff;
+  border: 1.5px solid var(--crimson);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.print-btn:hover {
+  background: var(--crimson);
+  color: #fff;
+}
+
+.print-btn svg {
+  flex-shrink: 0;
+}
+
+/* View toggles */
+.view-toggles {
+  display: flex;
+  gap: 0;
+  background: #e8e4de;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.view-toggles button {
+  padding: 7px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #666;
+  background: transparent;
+  border: none;
+  transition: all 0.2s;
+}
+
+.view-toggles button.active {
+  background: var(--crimson);
+  color: #fff;
+}
+
+.view-toggles button:hover:not(.active) {
+  background: #d9d4cc;
+}
+
+/* Main content */
+.main-content {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 1024px) {
+  .app {
+    padding: 0 16px 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .app {
+    padding: 0 12px 24px;
+  }
+
+  .controls-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-box {
+    flex: 1 1 auto;
+  }
+
+  .view-toggles {
+    justify-content: center;
+  }
+
+  .view-toggles button {
+    flex: 1;
+    padding: 7px 10px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .app {
+    padding: 0 8px 16px;
+  }
+
+  .view-toggles button {
+    padding: 6px 6px;
+    font-size: 11px;
+  }
+}
+
+/* Agenda section: visible on screen and in print */
+.print-footer {
+  margin-top: 32px;
+  padding-top: 16px;
+}
+
+.print-section-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--crimson);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+  border-bottom: 1.5px solid var(--crimson);
+}
+
+.print-legend {
+  margin-bottom: 20px;
+}
+
+.print-legend-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+}
+
+.print-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #333;
+}
+
+.print-legend-swatch {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.print-agenda-month {
+  margin-bottom: 16px;
+}
+
+.print-agenda-month-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: #444;
+  padding: 4px 0 3px;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 2px;
+}
+
+.print-agenda-item {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 3px 0;
+  font-size: 11px;
+  color: #333;
+  border-bottom: 1px solid #f2f0ed;
+}
+
+.print-cat-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  position: relative;
+  top: 1px;
+}
+
+.print-agenda-date {
+  flex-shrink: 0;
+  width: 120px;
+  color: #666;
+  font-variant-numeric: tabular-nums;
+}
+
+.print-agenda-name {
+  flex: 1;
+}
+
+/* Print-all section: hidden on screen */
+.print-all-section {
+  display: none;
+}
+
+/* ========== Print / PDF ========== */
+@media print {
+  /* Force background colors to print */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  body {
+    background: #fff !important;
+  }
+
+  .app {
+    max-width: none;
+    padding: 0;
+  }
+
+  /* Hide interactive controls */
+  .controls,
+  .print-btn,
+  .modal-overlay,
+  .multi-month-nav,
+  .back-btn,
+  .list-controls {
+    display: none !important;
+  }
+
+  /* Remove shadows and animations */
+  .month-cell,
+  .month-detail,
+  .list-view {
+    box-shadow: none !important;
+    animation: none !important;
+  }
+
+  .multi-month-view,
+  .main-content {
+    animation: none !important;
+  }
+
+  /* Keep header compact */
+  .header {
+    padding: 8px 0 4px;
+    margin-bottom: 4px;
+  }
+
+  /* Year grid: keep 3 columns, tighten spacing */
+  .quarter-months {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 10px;
+    padding: 6px 0;
+  }
+
+  .quarter-divider {
+    margin: 2px 0;
+  }
+
+  /* Prevent months from splitting across pages */
+  .month-cell {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .quarter-row {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Disable hover effects */
+  .day-cell.has-event:hover,
+  .day-cell.has-event.hovered,
+  .detail-day-cell.has-event:hover,
+  .detail-day-cell.has-event.hovered {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Month detail: remove back button area, show title only */
+  .month-detail-top {
+    padding: 10px 16px;
+  }
+
+  /* List view: clean table for print */
+  .list-view {
+    border-radius: 0;
+  }
+
+  .list-row {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Print footer overrides */
+  .print-footer {
+    margin-top: 24px;
+  }
+
+  .print-agenda {
+    page-break-before: always;
+    break-before: page;
+  }
+
+  .print-agenda-month {
+    margin-bottom: 12px;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .print-agenda-item {
+    padding: 2px 0;
+    font-size: 9px;
+  }
+
+  .print-cat-dot {
+    width: 7px;
+    height: 7px;
+  }
+
+  .print-agenda-date {
+    width: 110px;
+  }
+
+  /* ===== Print All Months mode ===== */
+  .printing-all .main-content,
+  .printing-all .print-footer,
+  .printing-all .header {
+    display: none !important;
+  }
+
+  .printing-all .print-all-section {
+    display: block !important;
+  }
+
+  .print-all-page {
+    page-break-after: always;
+    break-after: page;
+  }
+
+  .detail-note-date {
+    display: none !important;
+  }
+
+  .print-all-page:last-of-type {
+    page-break-after: auto;
+    break-after: auto;
+  }
+
+  .print-all-agenda {
+    margin-top: 16px;
+    border-top: 1px solid #e8e4de;
+    padding-top: 8px;
+  }
+
+  .print-all-legend {
+    margin-top: 24px;
+  }
+
+  /* Page setup */
+  @page {
+    margin: 0.35in;
+    @bottom-center {
+      content: counter(page);
+      font-size: 9px;
+      color: #999;
+      font-family: inherit;
+    }
+  }
+}

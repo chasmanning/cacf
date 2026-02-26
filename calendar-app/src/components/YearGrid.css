@@ -1,0 +1,40 @@
+.year-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.quarter-row {
+  display: flex;
+  flex-direction: column;
+}
+
+.quarter-months {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 12px 0;
+}
+
+.quarter-divider {
+  height: 2px;
+  background: var(--crimson);
+  opacity: 0.3;
+  margin: 4px 0;
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 900px) {
+  .quarter-months {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
+
+@media (max-width: 540px) {
+  .quarter-months {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 8px 0;
+  }
+}

@@ -1,0 +1,95 @@
+import { MONTH_NAMES } from '../constants';
+import MonthCell from './MonthCell';
+import MonthDetail from './MonthDetail';
+import './MultiMonthView.css';
+
+function MultiMonthView({
+  year, count, startMonth, onStartMonthChange,
+  events, monthNotes, onMonthClick, onEventClick,
+  hoveredEvent, onEventHover, searchQuery, onBackToYear
+}) {
+  const months = [];
+  for (let i = 0; i < count; i++) {
+    months.push((startMonth + i) % 12);
+  }
+
+  const canGoBack = startMonth > 0;
+  const canGoForward = startMonth + count <= 11;
+
+  const handlePrev = () => {
+    if (canGoBack) onStartMonthChange(startMonth - 1);
+  };
+
+  const handleNext = () => {
+    if (canGoForward) onStartMonthChange(startMonth + 1);
+  };
+
+  const rangeLabel = count === 1
+    ? MONTH_NAMES[months[0]]
+    : `${MONTH_NAMES[months[0]]} – ${MONTH_NAMES[months[months.length - 1]]}`;
+
+  return (
+    <div className="multi-month-view">
+      <div className="multi-month-nav">
+        <button className="year-back-btn" onClick={onBackToYear}>
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+            <path d="M10 12L6 8L10 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          Year
+        </button>
+        <div className="month-nav-center">
+          <button
+            className="nav-btn"
+            onClick={handlePrev}
+            disabled={!canGoBack}
+          >
+            <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
+              <path d="M10 12L6 8L10 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+          <span className="nav-label">{rangeLabel} {year}</span>
+          <button
+            className="nav-btn"
+            onClick={handleNext}
+            disabled={!canGoForward}
+          >
+            <svg width="18" height="18" viewBox="0 0 16 16" fill="none">
+              <path d="M6 4L10 8L6 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+      {count === 1 ? (
+        <MonthDetail
+          year={year}
+          month={months[0]}
+          events={events}
+          monthNotes={monthNotes}
+          onEventClick={onEventClick}
+          hoveredEvent={hoveredEvent}
+          onEventHover={onEventHover}
+        />
+      ) : (
+        <div className={`multi-month-grid cols-${count}`}>
+          {months.map((m) => (
+            <MonthCell
+              key={m}
+              year={year}
+              month={m}
+              events={events}
+              monthNotes={monthNotes}
+              onMonthClick={onMonthClick}
+              onEventClick={onEventClick}
+              hoveredEvent={hoveredEvent}
+              onEventHover={onEventHover}
+              searchQuery={searchQuery}
+              size="md"
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default MultiMonthView;
