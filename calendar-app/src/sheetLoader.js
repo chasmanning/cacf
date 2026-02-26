@@ -94,6 +94,44 @@ async function fetchFromSheet() {
 }
 
 /**
+ * Fetch params from the "Params" tab of the Google Sheet.
+ * Returns an object of key/value pairs.
+ */
+async function fetchParams() {
+  const { sheetId } = SHEET_CONFIG;
+  const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv&sheet=Params`;
+
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`Params fetch failed: ${res.status}`);
+
+  const text = await res.text();
+  const rows = parseCSV(text);
+  const params = {};
+
+  for (const row of rows) {
+    const key = row['key'] || row['parameter'] || row['param'] || '';
+    const value = row['value'] || '';
+    if (key) params[key.toLowerCase()] = value;
+  }
+  return params;
+}
+
+/**
+ * Load the password from the Params tab.
+ * Returns the password string, or null if not set.
+ */
+export async function loadPassword() {
+  if (!SHEET_CONFIG.enabled || !SHEET_CONFIG.sheetId) return null;
+  try {
+    const params = await fetchParams();
+    return params['password'] || null;
+  } catch (err) {
+    console.warn('Could not load params from sheet:', err);
+    return null;
+  }
+}
+
+/**
  * Load events: try Google Sheets first, fall back to local events.json.
  */
 export async function loadEvents() {

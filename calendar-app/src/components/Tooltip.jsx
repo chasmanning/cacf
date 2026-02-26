@@ -1,15 +1,16 @@
 import { createPortal } from 'react-dom';
-import { CATEGORIES } from '../constants';
+import { useCategories } from '../CategoryContext';
 import { formatDateRange } from '../utils';
 import './Tooltip.css';
 
 function Tooltip({ event, allEvents, x, y }) {
+  const categories = useCategories();
   const events = allEvents || [event];
 
   return createPortal(
     <div className="tooltip" style={{ left: x, top: y - 8 }}>
       {events.map((ev, i) => {
-        const cat = CATEGORIES[ev.category] || {};
+        const cat = categories[ev.category] || {};
         return (
           <div key={i} className={`tooltip-event ${i > 0 ? 'tooltip-event-extra' : ''}`}>
             <div className="tooltip-header">
