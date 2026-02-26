@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
-import { MONTH_NAMES, DAY_NAMES, CATEGORIES } from '../constants';
+import { MONTH_NAMES, DAY_NAMES } from '../constants';
+import { useCategories } from '../CategoryContext';
 import { getWeeksForMonth, eventOverlapsMonth, getEventSpanForMonth, daysBetween, formatDateRange } from '../utils';
 import Tooltip from './Tooltip';
 import './MonthDetail.css';
@@ -8,6 +9,7 @@ function MonthDetail({
   year, month, events, monthNotes, onBack,
   onEventClick, hoveredEvent, onEventHover
 }) {
+  const CATEGORIES = useCategories();
   const [tooltip, setTooltip] = useState(null);
   const weeks = useMemo(() => getWeeksForMonth(year, month), [year, month]);
 

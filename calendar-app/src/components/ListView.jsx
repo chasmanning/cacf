@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
-import { MONTH_NAMES, CATEGORIES } from '../constants';
+import { MONTH_NAMES } from '../constants';
+import { useCategories } from '../CategoryContext';
 import { parseDate, formatDateRange } from '../utils';
 import './ListView.css';
 
@@ -59,7 +60,8 @@ function ListView({ events, onEventClick }) {
 }
 
 function ListRow({ event, onClick }) {
-  const cat = CATEGORIES[event.category] || {};
+  const categories = useCategories();
+  const cat = categories[event.category] || {};
   return (
     <div className="list-row" onClick={onClick}>
       <div className="list-date">{formatDateRange(event.startDate, event.endDate)}</div>

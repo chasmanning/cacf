@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
-import { CATEGORIES } from '../constants';
+import { useCategories } from '../CategoryContext';
 import { formatDateRange } from '../utils';
 import './EventModal.css';
 
 function EventModal({ event, onClose }) {
-  const cat = CATEGORIES[event.category] || {};
+  const categories = useCategories();
+  const cat = categories[event.category] || {};
 
   useEffect(() => {
     const handleKey = (e) => {

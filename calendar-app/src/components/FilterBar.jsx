@@ -1,11 +1,13 @@
-import { CATEGORIES } from '../constants';
+import { useCategories } from '../CategoryContext';
 import './FilterBar.css';
 
 function FilterBar({ activeCategories, toggleCategory, selectAll, selectNone }) {
+  const categories = useCategories();
+
   return (
     <div className="filter-bar">
       <div className="filter-pills">
-        {Object.entries(CATEGORIES).map(([name, { color, textColor }]) => {
+        {Object.entries(categories).map(([name, { color, textColor }]) => {
           const active = activeCategories.has(name);
           return (
             <button
