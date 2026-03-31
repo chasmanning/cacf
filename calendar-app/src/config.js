@@ -19,7 +19,7 @@
  *
  * 4. Paste it below and set enabled: true
  */
-export const SHEET_CONFIG = {
+const SHEET_DEFAULTS = {
   enabled: true,
   sheetId: '1ieLxJ236GqVGJuLw7-XlNhk3UPNtUipsnDJfO2768gU',
   // Optional: specific tab name (leave empty for first tab)
@@ -27,3 +27,6 @@ export const SHEET_CONFIG = {
   // Auto-refresh interval in minutes (0 = load once on page open)
   refreshMinutes: 5,
 };
+
+// Allow per-page overrides via window.CACF_CONFIG (set before module loads)
+export const SHEET_CONFIG = { ...SHEET_DEFAULTS, ...(window.CACF_CONFIG || {}) };
