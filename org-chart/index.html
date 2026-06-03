@@ -65,13 +65,26 @@
 
   footer { text-align: center; color: #8a979d; font-size: 11.5px; margin-top: 36px; }
   @media print {
-    @page { size: landscape; margin: 0.4in; }
-    body { padding: 0; background: #fff; }
+    @page { size: landscape; margin: 0.35in; }
+    body { padding: 0; background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    h1 { font-size: 20px; margin: 0 0 4px; }
+    .subtitle { font-size: 11px; margin: 0 0 12px; }
     .tabs { display: none; }
-    .chart { overflow: visible; }
+    .legend { font-size: 10px; gap: 8px 16px; margin-bottom: 14px; }
+    .swatch { width: 10px; height: 10px; }
+    .chart { overflow: visible; padding: 0; }
+    .tree, .tree ul { padding-top: 14px; }
+    .tree li { padding: 14px 6px 0; }
+    .tree li::before, .tree li::after,
+    .tree ul::before { height: 14px; }
+    .card { width: 138px; min-height: 72px; padding: 6px 8px; box-shadow: none;
+            border-top-width: 3px; border-radius: 6px; }
+    .card .name { font-size: 10.5px; line-height: 1.2; }
+    .card .title { font-size: 9px; margin-top: 2px; line-height: 1.25; }
+    .card .planned { font-size: 8.5px; margin-top: 2px; }
+    .card .dept { font-size: 7px; margin-top: 5px; padding: 1px 6px; }
+    .card.future { border-top-width: 3px; }
     footer { display: none; }
-    .card { box-shadow: none; }
-    #scaleWrap { transform-origin: top center; }
   }
 </style>
 </head>
@@ -90,9 +103,7 @@
   </div>
 
   <div class="chart">
-    <div id="scaleWrap">
-      <div class="tree"><div class="status">Loading chart…</div></div>
-    </div>
+    <div class="tree"><div class="status">Loading chart…</div></div>
   </div>
 
   <footer>Live from Google Sheets &middot; edit the sheet (or add a tab) and reload to update. Print (landscape) to save the current tab as PDF.</footer>
@@ -248,22 +259,7 @@
       return li;
     }
 
-    /* Scale-to-fit for printing the active tab */
-    const wrap = document.getElementById("scaleWrap");
-    function fitForPrint() {
-      const tree = wrap.querySelector(".tree");
-      const pageW = 1056 - 76, pageH = 816 - 76;
-      const w = tree.scrollWidth, h = tree.scrollHeight;
-      const scale = Math.min(1, pageW / w, pageH / h);
-      wrap.style.transform = "scale(" + scale + ")";
-      wrap.style.height = (h * scale) + "px";
-      wrap.style.width = (w * scale) + "px";
-      wrap.style.margin = "0 auto";
-    }
-    function resetAfterPrint() { wrap.style.transform = ""; wrap.style.height = ""; wrap.style.width = ""; wrap.style.margin = ""; }
-    window.addEventListener("beforeprint", fitForPrint);
-    window.addEventListener("afterprint", resetAfterPrint);
-    if (window.matchMedia) window.matchMedia("print").addListener(m => m.matches ? fitForPrint() : resetAfterPrint());
+    /* Print sizing is handled entirely in CSS @media print — no JS scaling. */
   </script>
 </body>
 </html>
