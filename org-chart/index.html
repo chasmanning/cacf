@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CACF Organizational Chart</title>
+<style>
+  :root {
+    --exec: #1f4e5f; --exec-bg: #e3eef1;
+    --phil: #1b6e4f; --phil-bg: #e1f1ea;
+    --fin:  #b5642a; --fin-bg:  #f6e9dd;
+    --comm: #a83248; --comm-bg: #f7e1e6;
+    --line: #c2ccd1; --ink: #1d2a30;
+  }
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+         margin: 0; padding: 40px 24px 60px; background: #f7f9fa; color: var(--ink); }
+  h1 { text-align: center; font-size: 26px; font-weight: 700; margin: 0 0 6px; }
+  .subtitle { text-align: center; color: #5a6a72; font-size: 14px; margin: 0 0 22px; }
+
+  .tabs { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 0 0 26px; }
+  .tab { font: inherit; font-size: 13px; font-weight: 600; color: #5a6a72; background: #eef2f4;
+         border: 1px solid var(--line); border-radius: 20px; padding: 6px 15px; cursor: pointer; }
+  .tab:hover { background: #e2e8eb; }
+  .tab.active, .tab.active:hover { background: var(--exec); color: #fff; border-color: var(--exec); }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 14px 22px; justify-content: center; margin-bottom: 36px; font-size: 13px; }
+  .legend span { display: inline-flex; align-items: center; gap: 7px; }
+  .swatch { width: 13px; height: 13px; border-radius: 3px; display: inline-block; }
+  .status { text-align: center; color: #8a979d; font-size: 13px; padding: 40px; }
+  .status.error { color: #a83248; }
+
+  .chart { overflow-x: auto; padding-bottom: 20px; }
+  .tree { width: max-content; margin: 0 auto; }
+  .tree, .tree ul { position: relative; padding-top: 22px; display: flex; justify-content: safe center; }
+  .tree ul { margin: 0; padding-left: 0; }
+  .tree li { list-style: none; position: relative; padding: 22px 12px 0; display: flex; flex-direction: column; align-items: center; }
+  .tree li::before, .tree li::after { content: ""; position: absolute; top: 0; right: 50%; width: 50%; height: 22px; border-top: 2px solid var(--line); }
+  .tree li::after { right: auto; left: 50%; border-left: 2px solid var(--line); }
+  .tree li:first-child::before, .tree li:last-child::after { border: 0 none; }
+  .tree li:last-child::before { border-right: 2px solid var(--line); border-radius: 0 6px 0 0; }
+  .tree li:first-child::after { border-radius: 6px 0 0 0; }
+  .tree ul::before { content: ""; position: absolute; top: 0; left: 50%; height: 22px; border-left: 2px solid var(--line); }
+  .tree li:only-child::before { display: none; }
+  .tree li:only-child::after { display: block; left: 50%; right: auto; border-top: 0 none; border-left: 2px solid var(--line); border-radius: 0; }
+  .tree > ul { padding-top: 0; }
+  .tree > ul::before { display: none; }
+  .tree li.root::before, .tree li.root::after { display: none; }
+
+  .card { border: 1px solid var(--line); border-top: 4px solid var(--c, #888); background: #fff;
+          border-radius: 8px; padding: 11px 14px; width: 204px; text-align: center;
+          box-shadow: 0 1px 3px rgba(0,0,0,.07); position: relative; z-index: 1; min-height: 102px; }
+  .card .name { font-weight: 700; font-size: 14px; line-height: 1.25; }
+  .card .title { font-size: 12px; color: #45555d; margin-top: 4px; line-height: 1.3; }
+  .card .planned { font-size: 11px; font-style: italic; color: #7d8a90; margin-top: 4px; line-height: 1.3; }
+  .card .dept { display: inline-block; margin-top: 8px; font-size: 9px; font-weight: 600; letter-spacing: .01em;
+                text-transform: uppercase; white-space: nowrap; padding: 2px 8px; border-radius: 20px;
+                color: var(--c, #555); background: var(--cbg, #eee); }
+  .exec { --c: var(--exec); --cbg: var(--exec-bg); }
+  .phil { --c: var(--phil); --cbg: var(--phil-bg); }
+  .fin  { --c: var(--fin);  --cbg: var(--fin-bg); }
+  .comm { --c: var(--comm); --cbg: var(--comm-bg); }
+  .card.future { border: 1.5px dashed var(--c, #9aa7ad); border-top: 4px dashed var(--c, #9aa7ad); background: #fbfcfd; box-shadow: none; }
+  .card.future .name { color: #46555c; }
+
+  footer { text-align: center; color: #8a979d; font-size: 11.5px; margin-top: 36px; }
+  @media print {
+    @page { size: landscape; margin: 0.4in; }
+    body { padding: 0; background: #fff; }
+    .tabs { display: none; }
+    .chart { overflow: visible; }
+    footer { display: none; }
+    .card { box-shadow: none; }
+    #scaleWrap { transform-origin: top center; }
+  }
+</style>
+</head>
+<body>
+  <h1>CACF Organizational Chart</h1>
+  <p class="subtitle" id="subtitle">Loading…</p>
+
+  <div class="tabs" id="tabs"></div>
+
+  <div class="legend">
+    <span><i class="swatch" style="background:var(--exec)"></i>Executive Office</span>
+    <span><i class="swatch" style="background:var(--phil)"></i>Philanthropic Engagement</span>
+    <span><i class="swatch" style="background:var(--fin)"></i>Finance</span>
+    <span><i class="swatch" style="background:var(--comm)"></i>Community Impact</span>
+    <span><i class="swatch" style="border:1.5px dashed #9aa7ad;background:transparent"></i>Planned role (not yet filled)</span>
+  </div>
+
+  <div class="chart">
+    <div id="scaleWrap">
+      <div class="tree"><div class="status">Loading chart…</div></div>
+    </div>
+  </div>
+
+  <footer>Live from Google Sheets &middot; edit the sheet (or add a tab) and reload to update. Print (landscape) to save the current tab as PDF.</footer>
+
+  <script>
+    /* ===== Configure these two ===== */
+    const SPREADSHEET_ID = "1W0e05D_tkoYtPuko9VYxj3x_QrSCP4X65QK6jGgWU18";
+    const API_KEY        = "AIzaSyBJghPCHmOkh6hB_qwu4hJf2QkQYrbZy0A";
+    /* ================================ */
+
+    const DEPT_CLASS = {
+      "Executive Office": "exec",
+      "Philanthropic Engagement": "phil",
+      "Finance": "fin",
+      "Community Impact": "comm"
+    };
+    const classForDept = d => DEPT_CLASS[(d || "").trim()] || "exec";
+    const esc = s => (s == null ? "" : String(s)).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    // A "Name" that is just a timeframe = a planned/unfilled role.
+    const PLANNED_RE = /^\s*(?:(?:spring|summer|fall|winter|q[1-4])\s+)?\d{4}\s*$/i;
+
+    const valuesCache = {};   // tabTitle -> rows
+    let tabs = [];            // [{title, index, sheetId}]
+    let activeTab = null;
+
+    init();
+
+    async function init() {
+      if (API_KEY.indexOf("PASTE_") === 0) { showError("Set API_KEY in index.html first."); return; }
+      try {
+        const meta = await fetchJSON(
+          `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}` +
+          `?key=${API_KEY}&fields=sheets.properties(title,index,sheetId)`);
+        tabs = (meta.sheets || []).map(s => s.properties).sort((a, b) => a.index - b.index);
+        if (!tabs.length) { showError("No tabs found in the spreadsheet."); return; }
+        buildTabBar();
+        selectTab(tabs[0].title);
+      } catch (e) { showError(e.message); }
+    }
+
+    async function fetchJSON(url) {
+      const r = await fetch(url);
+      if (!r.ok) {
+        let detail = ""; try { detail = (await r.json()).error.message; } catch (_) {}
+        throw new Error("HTTP " + r.status + (detail ? " — " + detail : ""));
+      }
+      return r.json();
+    }
+
+    function buildTabBar() {
+      const bar = document.getElementById("tabs");
+      bar.innerHTML = "";
+      tabs.forEach(t => {
+        const b = document.createElement("button");
+        b.className = "tab";
+        b.textContent = t.title;
+        b.dataset.title = t.title;
+        b.addEventListener("click", () => selectTab(t.title));
+        bar.appendChild(b);
+      });
+    }
+
+    async function selectTab(title) {
+      activeTab = title;
+      document.querySelectorAll(".tab").forEach(b => b.classList.toggle("active", b.dataset.title === title));
+      setStatus("Loading " + title + "…");
+      try {
+        if (!valuesCache[title]) {
+          const data = await fetchJSON(
+            `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}` +
+            `/values/${encodeURIComponent(title)}?key=${API_KEY}`);
+          valuesCache[title] = data.values || [];
+        }
+        renderTab(valuesCache[title], title);
+      } catch (e) { showError(e.message); }
+    }
+
+    function setStatus(msg) { document.querySelector(".tree").innerHTML = '<div class="status">' + esc(msg) + '</div>'; }
+    function showError(msg) {
+      document.querySelector(".tree").innerHTML =
+        '<div class="status error">Couldn\'t load the chart.<br>' + esc(msg) +
+        '<br><br>Check: API key set &amp; allows this site, and the sheet is shared “Anyone with the link → Viewer.”</div>';
+      document.getElementById("subtitle").textContent = "";
+    }
+
+    function cell(row, i) { return (i >= 0 && i < row.length && row[i] != null) ? row[i] : ""; }
+
+    function renderTab(values, title) {
+      if (!values || !values.length) { showError("Tab “" + title + "” is empty."); return; }
+      const headers = values[0].map(h => (h || "").trim().toLowerCase());
+      const ci = {
+        id: headers.indexOf("id"), name: headers.indexOf("name"), title: headers.indexOf("title"),
+        dept: headers.indexOf("department"), mgr: headers.indexOf("manager")
+      };
+
+      const nodes = {};
+      for (let i = 1; i < values.length; i++) {
+        const row = values[i]; if (!row || !row.length) continue;
+        const id = String(cell(row, ci.id)).trim(); if (!id) continue;
+        nodes[id] = {
+          id,
+          name: cell(row, ci.name).trim(),
+          title: cell(row, ci.title).trim(),
+          dept: cell(row, ci.dept).trim(),
+          manager: String(cell(row, ci.mgr)).trim(),
+          children: []
+        };
+      }
+
+      let root = null, filled = 0, planned = 0;
+      Object.values(nodes).forEach(n => {
+        n.planned = PLANNED_RE.test(n.name);
+        if (n.planned) planned++; else filled++;
+        if (!n.manager) { root = root || n; return; }
+        const m = nodes[n.manager];
+        if (m) m.children.push(n);
+        else console.warn("Manager ID " + n.manager + " not found for: " + (n.name || n.title));
+      });
+      if (!root) { showError("No top-level row on “" + title + "” (one row must have a blank Manager)."); return; }
+
+      const tree = document.querySelector(".tree");
+      tree.innerHTML = "";
+      const ul = document.createElement("ul");
+      ul.appendChild(renderNode(root, true));
+      tree.appendChild(ul);
+
+      document.getElementById("subtitle").textContent =
+        filled + " filled" + (planned ? " + " + planned + " planned" : "") + " · " + title;
+    }
+
+    function renderNode(n, isRoot) {
+      const li = document.createElement("li");
+      if (isRoot) li.className = "root";
+      const card = document.createElement("div");
+      card.className = "card " + classForDept(n.dept) + (n.planned ? " future" : "");
+      if (n.planned) {
+        card.innerHTML =
+          '<div class="name">' + esc(n.title) + '</div>' +
+          '<div class="planned">Anticipated ' + esc(n.name) + '</div>' +
+          '<div class="dept">' + esc(n.dept) + '</div>';
+      } else {
+        card.innerHTML =
+          '<div class="name">' + esc(n.name) + '</div>' +
+          '<div class="title">' + esc(n.title) + '</div>' +
+          '<div class="dept">' + esc(n.dept) + '</div>';
+      }
+      li.appendChild(card);
+      if (n.children.length) {
+        const ul = document.createElement("ul");
+        n.children.forEach(c => ul.appendChild(renderNode(c, false)));
+        li.appendChild(ul);
+      }
+      return li;
+    }
+
+    /* Scale-to-fit for printing the active tab */
+    const wrap = document.getElementById("scaleWrap");
+    function fitForPrint() {
+      const tree = wrap.querySelector(".tree");
+      const pageW = 1056 - 76, pageH = 816 - 76;
+      const w = tree.scrollWidth, h = tree.scrollHeight;
+      const scale = Math.min(1, pageW / w, pageH / h);
+      wrap.style.transform = "scale(" + scale + ")";
+      wrap.style.height = (h * scale) + "px";
+      wrap.style.width = (w * scale) + "px";
+      wrap.style.margin = "0 auto";
+    }
+    function resetAfterPrint() { wrap.style.transform = ""; wrap.style.height = ""; wrap.style.width = ""; wrap.style.margin = ""; }
+    window.addEventListener("beforeprint", fitForPrint);
+    window.addEventListener("afterprint", resetAfterPrint);
+    if (window.matchMedia) window.matchMedia("print").addListener(m => m.matches ? fitForPrint() : resetAfterPrint());
+  </script>
+</body>
+</html>
