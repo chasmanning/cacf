@@ -1,0 +1,24 @@
+MeetingID,Committee,Abbr,MeetingDate,DayOfWeek,MeetingType,Status,Feeds,Notes
+1,Governing Board (Retreat),BOD,2026-02-13,Fri,Board,Done,,Board retreat
+2,Executive Committee,EC,2026-02-24,Tue,Committee,Done,Board 2026-03-24,Combined EC/CAC; agenda-set for Q1 board
+3,Community Advisory Committee,CAC,2026-02-24,Tue,Committee,Done,Board 2026-03-24,Combined with EC
+4,Investment Committee,IC,2026-03-06,Fri,Committee,Done,F&A 2026-03-17,Confirm IC home folder
+5,Finance & Audit Committee,F&A,2026-03-17,Tue,Committee,Done,Board 2026-03-24,Board-7cal; overlaps Deep Work Wk Mar 17-19
+6,Governing Board,BOD,2026-03-24,Tue,Board,Done,,Q1 board
+7,Local Impact Investing Committee,LIIC,2026-05-13,Wed,Committee,Done,Board,Confirm downstream/lead
+8,Executive Committee,EC,2026-05-28,Thu,Committee,Done,Board 2026-06-23,Agenda-set for Q2 board
+9,Investment Committee,IC,2026-06-04,Thu,Committee,Done,F&A 2026-06-16,
+10,Finance & Audit Committee,F&A,2026-06-16,Tue,Committee,Today,Board 2026-06-23,Board-7cal; Juneteenth Jun19 falls before board
+11,Governing Board,BOD,2026-06-23,Tue,Board,Upcoming,,Q2 board (cycle in progress)
+12,Investment Committee,IC,2026-08-13,Thu,Committee,Upcoming,F&A 2026-09-15,
+13,Executive Committee,EC,2026-08-25,Tue,Committee,Upcoming,Board 2026-09-22,Agenda-set for Q3 board
+14,Community Advisory Committee (Retreat),CAC,,Aug-TBD,Committee,Tentative,Board,Calendar shows Aug month-range; liaison to set
+15,Local Impact Investing Committee,LIIC,,Aug-TBD,Committee,Tentative,Board,Calendar shows Aug month-range; liaison to set
+16,Finance & Audit Committee,F&A,2026-09-15,Tue,Committee,Upcoming,Board 2026-09-22,Board-7cal; Deep Work Wk Sep 8-10 = book sprint
+17,Governing Board,BOD,2026-09-22,Tue,Board,Upcoming,,Q3 board (best-aligned cycle)
+18,Community Advisory Committee,CAC,,Nov-TBD,Committee,Tentative,Board,Calendar shows Nov month-range; liaison to set
+19,Local Impact Investing Committee,LIIC,,Nov-TBD,Committee,Tentative,Board,Calendar shows Nov month-range; liaison to set
+20,Investment Committee,IC,2026-12-03,Thu,Committee,Upcoming,Board 2026-12-15,Combined IC/EC
+21,Executive Committee,EC,2026-12-03,Thu,Committee,Upcoming,Board 2026-12-15,Combined IC/EC; tight ~12-day agenda-set
+22,Finance & Audit Committee,F&A,2026-12-08,Tue,Committee,Upcoming,Board 2026-12-15,Board-7cal; no Deep Work Wk this qtr
+23,Governing Board,BOD,2026-12-15,Tue,Board,Upcoming,,Q4 board; follow-up before Winter Reset Dec21
