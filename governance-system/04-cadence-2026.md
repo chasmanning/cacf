@@ -10,18 +10,18 @@
 | Date | Day | Body | Status | Notes / what it feeds |
 |------|-----|------|--------|-----------------------|
 | Feb 13 | Fri | **Board Retreat** | done | — |
-| Feb 24 | Tue | EC + CAC | done | EC agenda-set for Mar 24 board |
+| Feb 24 | Tue | EC + CAC | done | EC role to confirm (does not set agenda) |
 | Mar 6 | Fri | IC | done | → F&A/Board (Q1) |
 | Mar 17 | Tue | F&A | done | = Board − 7 cal; overlaps Deep Work Wk Mar 17–19 |
 | Mar 24 | Tue | **Board** | done | Q1 |
 | Apr–May | — | scholarship/program cmtes | done/tentative | Tier 2 |
 | May 13 | Wed | LIIC | done | → Board |
-| May 28 | Thu | EC | done | agenda-set for Jun 23 board |
+| May 28 | Thu | EC | done | EC role to confirm |
 | Jun 4 | Thu | IC | done | → F&A/Board (Q2) |
 | **Jun 16** | **Tue** | **F&A** | **today** | = Board − 7 cal |
 | **Jun 23** | **Tue** | **Board** | **upcoming** | **Q2 — cycle in progress** |
 | Aug 13 | Thu | IC | upcoming | → F&A/Board (Q3) |
-| Aug 25 | Tue | EC | upcoming | agenda-set for Sep 22 board |
+| Aug 25 | Tue | EC | upcoming | EC role to confirm |
 | Aug (TBD) | — | CAC retreat, LIIC | tentative | liaison to set |
 | Sep 15 | Tue | F&A | upcoming | = Board − 7 cal |
 | Sep 22 | Tue | **Board** | upcoming | Q3 |
@@ -30,8 +30,9 @@
 | Dec 8 | Tue | F&A | upcoming | = Board − 7 cal |
 | Dec 15 | Tue | **Board** | upcoming | Q4 |
 
-(Tier-2 program/fund/scholarship dates — BAMA GC, MIB, CSP, award events — are on the annual
-calendar but are out of scope for the Tier-1 prep timeline until their liaisons opt in.)
+(Tier-2 program/scholarship bodies — Mothers in Bloom, Charlottesville Scholarship Program, award
+panels — are on the annual calendar but out of scope for the Tier-1 prep timeline until their
+liaisons opt in. "Bama" is an internal grant workflow, not a committee.)
 
 ## B. Worked prep timelines for the three remaining Board cycles
 Computed with **business-day** math, skipping CACF closures. "DWW" = Deep Work Week.
@@ -40,7 +41,7 @@ Computed with **business-day** math, skipping CACF closures. "DWW" = Deep Work W
 | Milestone | Date | Note |
 |-----------|------|------|
 | Provision (B−25 biz) | ~May 18 | past |
-| EC agenda-set | May 28 | done |
+| EC meeting | May 28 | done (role to confirm) |
 | IC | Jun 4 | done |
 | Materials due (B−10 biz) | **Jun 8** | = start of **DWW Jun 8–11**; practically have inputs in *before* the sprint |
 | Board-book build | **Jun 8–11 (DWW)** | the Deep Work Week *is* the book sprint |
@@ -59,7 +60,7 @@ Computed with **business-day** math, skipping CACF closures. "DWW" = Deep Work W
 | Milestone | Date | Note |
 |-----------|------|------|
 | Provision (B−25 biz) | ~Aug 18 | |
-| IC / EC agenda-set | Aug 13 / Aug 25 | |
+| IC / EC | Aug 13 / Aug 25 | EC role to confirm |
 | Materials due (B−10 biz) | **Sep 8** | have inputs in *before* Labor Day |
 | Board-book build | **Sep 8–10 (DWW)** | book sprint |
 | **Labor Day** | Sep 7 | office closed (just before the sprint) |
@@ -79,7 +80,7 @@ Computed with **business-day** math, skipping CACF closures. "DWW" = Deep Work W
 | Provision (B−25 biz) | ~Nov 9 | |
 | Thanksgiving | Nov 25–27 | office closed — eats into prep |
 | Materials due (B−10 biz) | **Dec 1** | |
-| IC + EC | Dec 3 | EC is only ~12 days out — **tight agenda-set** |
+| IC + EC | Dec 3 | EC role to confirm |
 | Book Wave 1 post (B−7 biz) | **Dec 4** | no DWW this quarter → schedule the build manually |
 | F&A | Dec 8 | |
 | F&A Wave 2 supplement | Dec 9 | |

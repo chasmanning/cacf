@@ -74,7 +74,9 @@ Uses CACF's **already-scheduled** real cycles as natural pilots — no new dates
 - [ ] Confirm/correct each **proposed** dependency in `02`.
 - [x] Investment Committee confirmed as a standing committee (`Committees/Investment Committee/YYYY`).
 - [x] Acronyms resolved: MIB = Mothers in Bloom; CSP = Charlottesville Scholarship Program.
-- [ ] Confirm Tier-2 owners/liaisons and what "Bama" on the calendar refers to (no folder by that name).
+- [x] "Bama" confirmed as an internal grant workflow (not a committee) — out of scope.
+- [ ] Confirm **who sets the board agenda** (per liaison, not EC) and its lead time.
+- [ ] Tier-2 (Mothers in Bloom, Charlottesville Scholarship Program, award panels) deferred to a later phase; onboard when liaisons opt in.
 - [ ] Assign every role above; have each liaison complete the intake worksheet.
 - [ ] IT: Power Automate licensing + service account.
 - [ ] Run the cadence-setting working session → 2027 locked.

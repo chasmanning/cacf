@@ -40,7 +40,7 @@ Due dates are **business-day offsets** from the meeting date `B`, using the conf
 | 1 | Provision folder set & confirm links | Prep | B−25 | Coordinator | Recurring |
 | 2 | Draft agenda v1 | Materials | B−20 | Liaison | Recurring |
 | 3 | Send prep / working-session invites | Prep | B−20 | Coordinator | Recurring |
-| 4 | Agenda-setting (e.g., EC for Board) | Review | committee-specific | Liaison | Chair approval |
+| 4 | Agenda-setting (owner TBD — not EC) | Review | committee-specific | Liaison | Chair approval |
 | 5 | Collect feeder reports & recommendations | Materials | B−10 | Liaison | ⬛ if waiting |
 | 6 | **Materials due** (all inputs in) | Materials | B−10 | Report owners | Recurring |
 | 7 | Compile book *(checklist below)* | Materials | B−8 | Coordinator | Recurring |

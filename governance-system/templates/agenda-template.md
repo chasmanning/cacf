@@ -33,5 +33,5 @@
 IC report · committee recommendations · [fund actions] · [strategic brief]
 
 ---
-*Items, order, and "consent vs. action" are set by the liaison/chair (Executive Committee sets the
-Board agenda where applicable — confirm in `02`).*
+*Items, order, and "consent vs. action" are set by the liaison/chair. (The Board agenda-setting
+owner is TBD — **not** the Executive Committee; confirm in `02`.)*

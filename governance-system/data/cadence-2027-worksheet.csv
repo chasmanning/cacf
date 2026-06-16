@@ -1,7 +1,7 @@
 Cycle,Body,Abbr,ProposedDate,DayOfWeek,Feeds,RequiredLeadBiz,SetByLiaison,Notes
 Retreat,Governing Board (Retreat),BOD,TBD,TBD,,,TBD,Set with board chair
 Q1,Governing Board,BOD,TBD,TBD,,,TBD,Anchor date - set first
-Q1,Executive Committee,EC,TBD,TBD,Board Q1,TBD,TBD,Agenda-setting gap to confirm
+Q1,Executive Committee,EC,TBD,TBD,Board Q1,TBD,TBD,EC role to confirm (does not set agenda)
 Q1,Investment Committee,IC,TBD,TBD,F&A Q1,TBD,TBD,Confirm FEG data lag
 Q1,Finance & Audit Committee,F&A,TBD,TBD,Board Q1,TBD,TBD,Confirm 7-day vs earlier
 Q1,Community Advisory Committee,CAC,TBD,TBD,Board Q1,TBD,TBD,

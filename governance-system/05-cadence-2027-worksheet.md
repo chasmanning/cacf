@@ -16,7 +16,7 @@
 
 ## The worksheet (to complete collaboratively — all cells TBD)
 
-| Cycle | Board date | EC (agenda-set) | IC | F&A | CAC | LIIC | BDC | Notes |
+| Cycle | Board date | EC | IC | F&A | CAC | LIIC | BDC | Notes |
 |-------|-----------|-----------------|----|----|-----|------|-----|-------|
 | Retreat | _TBD_ | — | — | — | — | — | — | |
 | Q1 | _TBD_ | _TBD_ | _TBD_ | _TBD_ | _TBD_ | _TBD_ | _TBD_ | |
@@ -51,7 +51,7 @@ from current data.
   2026 and was the gap in Q4).
 - Whether to keep **F&A at Board − 7 calendar days** or move it earlier to fold into Wave 1 of
   the book (the `03` two-wave question).
-- Whether **EC's agenda-setting gap** should be standardized (Q4 2026 was tight at ~12 days).
+- Confirm **who sets the board agenda** (per liaison, **not EC**) and standardize its lead time.
 - Confirm **CAC / LIIC / BDC** move from "tentative month" to firm dates with real lead times.
 - Bring **Tier-2** committees (BAMA GC, MIB, scholarship) into the worksheet if their liaisons
   want the standardized package.

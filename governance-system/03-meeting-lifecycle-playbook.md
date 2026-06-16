@@ -29,7 +29,7 @@ Produced for *every* meeting, stored in the meeting's folder set (`06`):
 |-----------|---------------|--------------|------------|
 | **Provision** | **B − 25 biz (~5 wks)** | Meetings list triggers: folder set created, Planner tasks generated with computed due dates, Teams kickoff posted. | ✅ Flow 1 |
 | **Agenda v1** | B − 25 biz | Coordinator drops the agenda template into the folder as v1; liaison starts shaping it. | Manual (folder seeded by flow) |
-| **Agenda-setting** | committee-specific (e.g., EC for the Board) | The agenda-setting body meets/confirms the draft agenda. | Manual |
+| **Agenda-setting** | owner TBD (**not** EC; confirm) | The agenda-setting owner confirms the draft agenda. | Manual |
 | **Prep invitations** | B − 20 biz | Calendar holds for prep/working sessions; meeting invite confirmed. | ◑ Flow 3 (optional) |
 | **Prep window** | B − 20 → B − 6 | Materials drafted collaboratively in Teams/SharePoint; tracked in Planner. | Manual |
 | **Materials due to coordinator** | **B − 10 biz** | Feeder reports & recommendations final enough to compile. Nudge to owners. | ✅ Flow 2 |

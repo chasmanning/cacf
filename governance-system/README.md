@@ -51,5 +51,5 @@ worksheet — the system just executes them reliably.
 - Confirm whether the observed **F&A = Board − 7 calendar days** pattern is intentional policy.
 - Confirm the **dependency links** marked *proposed* in `02`.
 - Identify the **liaison** for each committee and have them complete the intake worksheet.
-- Confirm Tier-2 owners (Mothers in Bloom = MIB, Charlottesville Scholarship Program = CSP) and what "Bama" on the calendar refers to (no SharePoint folder by that name).
+- Confirm **who sets the Board agenda** (per liaison, not EC). Tier-2 (Mothers in Bloom, Charlottesville Scholarship Program, award panels) is deferred to a later phase; "Bama" is an internal grant workflow, not a committee.
 - Decide Power Automate licensing/service-account details with IT (`08`).

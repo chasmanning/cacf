@@ -25,7 +25,7 @@ These also deserve a standardized package; cadence and ownership **TBD with liai
 
 | Body | Acronym | Evidence | Open question |
 |------|---------|----------|---------------|
-| "Bama" (grant committee?) | — | Calendar: GC mtg Mar 27 & Oct 2 (tentative); site visits Feb/Mar/Aug/Sep; checks May 11, Nov 16. | **No SharePoint folder named "Bama" found — confirm what this is, where its docs live, and the *site-visit → GC meeting → check-run* flow.** |
+| ~~"Bama"~~ (not a committee) | — | Calendar: site visits, "GC" mtg, check runs. | **Confirmed: an internal grant/fund workflow, *not* a governance body** — tracked on the program calendar; out of scope for this system. |
 | Mothers in Bloom | MIB | `Grantmaking Programs/Community Impact Advised Programs/Mothers in Bloom`. Calendar: MIB Mtg Mar, Jun, Sep. | A Community-Impact **advised grant program** (not a board committee). Confirm liaison & whether it wants the standardized package. |
 | Charlottesville Scholarship Program + scholarship panels | CSP | Calendar: CSP (Mar), All Scholarship (Apr), award events Apr–May (Allen, Bragg, Nelson, Buckingham/Fluvanna, Couric). | Confirm SharePoint home (not under "Scholarship") and which are standing committees vs. one-time award panels; who liaises. |
 
@@ -41,7 +41,7 @@ These also deserve a standardized package; cadence and ownership **TBD with liai
 | IC | Investment Committee | **Confirmed** (own folder) |
 | MIB | Mothers in Bloom | **Confirmed** |
 | CSP | Charlottesville Scholarship Program | **Confirmed** |
-| "Bama" | *calendar category — identity to confirm* | **To confirm** (no folder by that name) |
+| "Bama" | internal grant/fund workflow (site visits/check runs) — **not a committee** | Confirmed |
 
 ## Dependency map (PROPOSED — validate with each liaison)
 
@@ -58,7 +58,8 @@ flowchart LR
     IC -- investment performance report --> FA[Finance & Audit]
     IC -- investment report --> CONSENT
     FA -- financials / audit / budget --> CONSENT[Board Consent Agenda]
-    EC[Executive Committee] -- sets / approves agenda --> BOOK[Board Book]
+    AGENDA[Agenda-setting: owner TBD, not EC] --> BOOK[Board Book]
+    EC[Executive Committee] -. role to confirm .-> BOARD
     CAC[Community Advisory] -- community input / recs --> CONSENT
     LIIC[Local Impact Investing] -- impact-investment recs --> CONSENT
     BDC[Board Development] -- slate / governance --> BOARD
@@ -74,7 +75,8 @@ flowchart LR
 |------------|--------|-------------------------|
 | **F&A → Board** | **EVIDENCED** | In all four 2026 quarters F&A sits exactly **7 calendar days** before the Board (Mar 17→24, Jun 16→23, Sep 15→22, Dec 8→15). Confirm with F&A liaison whether 7 days is *intentional policy* before encoding it. **Tension:** 7 calendar days collides with a 7-*business*-day board-book post (see `03`). |
 | **IC → F&A / Board** | **PROPOSED** | IC precedes F&A/Board each quarter (e.g., Mar 6 → F&A Mar 17). Likely supplies investment performance for the finance review and board consent. Confirm with IC liaison; confirm FEG data-availability lag. |
-| **EC → Board (agenda-setting)** | **PROPOSED** | EC precedes each Board by ~3–4 weeks (Feb 24→Mar 24; Aug 25→Sep 22), the classic agenda-setting role; Dec 3→Dec 15 is tighter (~12 days). Confirm EC's role in finalizing the agenda. |
+| **EC → Board** | **TO CONFIRM** | Per liaison, **EC does *not* set the board agenda.** EC meets quarterly (Feb 24, May 28, Aug 25, Dec 3); its feed to the board is to confirm. |
+| **Agenda-setting → Board Book** | **OPEN — owner TBD** | A different body/process sets the agenda (not EC). Confirm the owner (commonly Board Chair + CEO) and its lead time — this is the gate the book waits on. |
 | **CAC → Board** | **PROPOSED** | Community input/recommendations to the board. Several 2026 CAC dates are *tentative* — liaison to set. |
 | **LIIC → Board / F&A** | **PROPOSED** | Impact-investment recommendations likely need F&A/Board approval. Confirm the approval path. |
 | **BDC → Board (annual meeting/slate)** | **PROPOSED** | Recruitment → "Open Call" → "Candidate Slates" → board vote (likely the annual/December meeting). Confirm timing. |
