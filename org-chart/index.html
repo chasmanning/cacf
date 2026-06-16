@@ -64,7 +64,30 @@
   .card.future .name { color: #46555c; }
 
   footer { text-align: center; color: #8a979d; font-size: 11.5px; margin-top: 36px; }
+
+  /* Login screen + page visibility */
+  .login-screen, .chart-page { display: none; }
+  body.show-login .login-screen {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    min-height: calc(100vh - 100px); max-width: 380px; margin: 0 auto;
+  }
+  body.show-chart .chart-page { display: block; }
+  .login-card { background: #fff; border: 1px solid var(--line); border-radius: 12px;
+                padding: 40px 32px; width: 100%; box-shadow: 0 4px 16px rgba(0,0,0,.06); text-align: center; }
+  .login-icon { color: var(--exec); margin-bottom: 16px; }
+  .login-card h2 { margin: 0 0 6px; font-size: 20px; font-weight: 700; color: var(--ink); }
+  .login-card p { margin: 0 0 22px; font-size: 13px; color: #5a6a72; }
+  .login-card input { width: 100%; padding: 10px 12px; font: inherit; font-size: 14px;
+                      border: 1px solid var(--line); border-radius: 6px; outline: none; }
+  .login-card input:focus { border-color: var(--exec); box-shadow: 0 0 0 3px rgba(31,78,95,.12); }
+  .login-card input.error { border-color: var(--comm); }
+  .login-error { font-size: 12px; color: var(--comm); margin-top: 8px; min-height: 16px; text-align: left; }
+  .login-card button { width: 100%; margin-top: 14px; padding: 10px 16px; font: inherit; font-size: 14px;
+                       font-weight: 600; color: #fff; background: var(--exec); border: none; border-radius: 6px; cursor: pointer; }
+  .login-card button:hover { background: #163a47; }
+
   @media print {
+    .login-screen { display: none !important; }
     @page { size: landscape; margin: 0.35in; }
     body { padding: 0; background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     h1 { font-size: 20px; margin: 0 0 4px; }
@@ -89,24 +112,42 @@
 </style>
 </head>
 <body>
-  <h1>CACF Organizational Chart</h1>
-  <p class="subtitle" id="subtitle">Loading…</p>
-
-  <div class="tabs" id="tabs"></div>
-
-  <div class="legend">
-    <span><i class="swatch" style="background:var(--exec)"></i>Executive Office</span>
-    <span><i class="swatch" style="background:var(--phil)"></i>Philanthropic Engagement</span>
-    <span><i class="swatch" style="background:var(--fin)"></i>Finance</span>
-    <span><i class="swatch" style="background:var(--comm)"></i>Community Impact</span>
-    <span><i class="swatch" style="border:1.5px dashed #9aa7ad;background:transparent"></i>Planned role (not yet filled)</span>
+  <div class="login-screen">
+    <div class="login-card">
+      <svg class="login-icon" viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="3" y="11" width="18" height="11" rx="2" />
+        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+      </svg>
+      <h2>CACF Organizational Chart</h2>
+      <p>Enter the password to view the chart.</p>
+      <form id="loginForm">
+        <input type="password" id="loginInput" placeholder="Password" autocomplete="current-password" autofocus />
+        <div class="login-error" id="loginError"></div>
+        <button type="submit">Enter</button>
+      </form>
+    </div>
   </div>
 
-  <div class="chart">
-    <div class="tree"><div class="status">Loading chart…</div></div>
-  </div>
+  <div class="chart-page">
+    <h1>CACF Organizational Chart</h1>
+    <p class="subtitle" id="subtitle">Loading…</p>
 
-  <footer>Live from Google Sheets &middot; edit the sheet (or add a tab) and reload to update. Print (landscape) to save the current tab as PDF.</footer>
+    <div class="tabs" id="tabs"></div>
+
+    <div class="legend">
+      <span><i class="swatch" style="background:var(--exec)"></i>Executive Office</span>
+      <span><i class="swatch" style="background:var(--phil)"></i>Philanthropic Engagement</span>
+      <span><i class="swatch" style="background:var(--fin)"></i>Finance</span>
+      <span><i class="swatch" style="background:var(--comm)"></i>Community Impact</span>
+      <span><i class="swatch" style="border:1.5px dashed #9aa7ad;background:transparent"></i>Planned role (not yet filled)</span>
+    </div>
+
+    <div class="chart">
+      <div class="tree"><div class="status">Loading chart…</div></div>
+    </div>
+
+    <footer>Live from Google Sheets &middot; edit the sheet (or add a tab) and reload to update. Print (landscape) to save the current tab as PDF.</footer>
+  </div>
 
   <script>
     /* ===== Configure these two ===== */
@@ -125,24 +166,89 @@
     // A "Name" that is just a timeframe = a planned/unfilled role.
     const PLANNED_RE = /^\s*(?:(?:spring|summer|fall|winter|q[1-4])\s+)?\d{4}\s*$/i;
 
+    const AUTH_KEY = "cacf-orgchart-auth";
     const valuesCache = {};   // tabTitle -> rows
-    let tabs = [];            // [{title, index, sheetId}]
+    let tabs = [];            // [{title, index, sheetId}] — chart tabs only (Params excluded)
     let activeTab = null;
+    let requiredPassword = null;
 
     init();
 
     async function init() {
-      if (API_KEY.indexOf("PASTE_") === 0) { showError("Set API_KEY in index.html first."); return; }
+      if (API_KEY.indexOf("PASTE_") === 0) { revealChart(); showError("Set API_KEY in index.html first."); return; }
       try {
         const meta = await fetchJSON(
           `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}` +
           `?key=${API_KEY}&fields=sheets.properties(title,index,sheetId)`);
-        tabs = (meta.sheets || []).map(s => s.properties).sort((a, b) => a.index - b.index);
+        const allTabs = (meta.sheets || []).map(s => s.properties).sort((a, b) => a.index - b.index);
+        const paramsTab = allTabs.find(t => t.title.toLowerCase() === "params");
+        tabs = allTabs.filter(t => t.title.toLowerCase() !== "params");
+
+        if (paramsTab) requiredPassword = await loadPassword(paramsTab.title);
+
+        if (requiredPassword && sessionStorage.getItem(AUTH_KEY) !== "1") {
+          revealLogin();
+          return;
+        }
+        revealChart();
         if (!tabs.length) { showError("No tabs found in the spreadsheet."); return; }
         buildTabBar();
         selectTab(tabs[0].title);
-      } catch (e) { showError(e.message); }
+      } catch (e) { revealChart(); showError(e.message); }
     }
+
+    async function loadPassword(tabTitle) {
+      try {
+        const data = await fetchJSON(
+          `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}` +
+          `/values/${encodeURIComponent(tabTitle)}?key=${API_KEY}`);
+        const rows = data.values || [];
+        if (!rows.length) return null;
+        const headers = rows[0].map(h => (h || "").trim().toLowerCase());
+        const keyIdx = headers.indexOf("key");
+        const valIdx = headers.indexOf("value");
+        if (keyIdx < 0 || valIdx < 0) return null;
+        for (let i = 1; i < rows.length; i++) {
+          const r = rows[i] || [];
+          const k = (r[keyIdx] || "").trim().toLowerCase();
+          const v = (r[valIdx] || "").trim();
+          if (k === "password") return v || null;
+        }
+        return null;
+      } catch (e) {
+        console.warn("Could not load Params tab:", e.message);
+        return null;
+      }
+    }
+
+    function revealLogin() {
+      document.body.classList.remove("show-chart");
+      document.body.classList.add("show-login");
+      const i = document.getElementById("loginInput"); if (i) i.focus();
+    }
+    function revealChart() {
+      document.body.classList.remove("show-login");
+      document.body.classList.add("show-chart");
+    }
+
+    document.getElementById("loginForm").addEventListener("submit", e => {
+      e.preventDefault();
+      const input = document.getElementById("loginInput");
+      const err = document.getElementById("loginError");
+      if (input.value === requiredPassword) {
+        sessionStorage.setItem(AUTH_KEY, "1");
+        err.textContent = "";
+        input.classList.remove("error");
+        revealChart();
+        if (!tabs.length) { showError("No tabs found in the spreadsheet."); return; }
+        buildTabBar();
+        selectTab(tabs[0].title);
+      } else {
+        err.textContent = "Incorrect password. Please try again.";
+        input.classList.add("error");
+        input.select();
+      }
+    });
 
     async function fetchJSON(url) {
       const r = await fetch(url);
