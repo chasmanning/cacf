@@ -77,10 +77,21 @@
   .login-icon { color: var(--exec); margin-bottom: 16px; }
   .login-card h2 { margin: 0 0 6px; font-size: 20px; font-weight: 700; color: var(--ink); }
   .login-card p { margin: 0 0 22px; font-size: 13px; color: #5a6a72; }
-  .login-card input { width: 100%; padding: 10px 12px; font: inherit; font-size: 14px;
+  .login-card .input-wrap { position: relative; }
+  .login-card input { width: 100%; padding: 10px 40px 10px 12px; font: inherit; font-size: 14px;
                       border: 1px solid var(--line); border-radius: 6px; outline: none; }
   .login-card input:focus { border-color: var(--exec); box-shadow: 0 0 0 3px rgba(31,78,95,.12); }
   .login-card input.error { border-color: var(--comm); }
+  .login-card .toggle-pw {
+    position: absolute; right: 4px; top: 50%; transform: translateY(-50%);
+    background: none; border: none; padding: 6px; margin: 0; width: auto;
+    color: #7d8a90; cursor: pointer; display: flex; align-items: center;
+  }
+  .login-card .toggle-pw:hover { color: var(--exec); background: none; }
+  .login-card .toggle-pw svg { display: block; }
+  .login-card .toggle-pw .eye-off { display: none; }
+  .login-card .toggle-pw.shown .eye-on { display: none; }
+  .login-card .toggle-pw.shown .eye-off { display: block; }
   .login-error { font-size: 12px; color: var(--comm); margin-top: 8px; min-height: 16px; text-align: left; }
   .login-card button { width: 100%; margin-top: 14px; padding: 10px 16px; font: inherit; font-size: 14px;
                        font-weight: 600; color: #fff; background: var(--exec); border: none; border-radius: 6px; cursor: pointer; }
@@ -121,7 +132,21 @@
       <h2>CACF Organizational Chart</h2>
       <p>Enter the password to view the chart.</p>
       <form id="loginForm">
-        <input type="password" id="loginInput" placeholder="Password" autocomplete="current-password" autofocus />
+        <div class="input-wrap">
+          <input type="password" id="loginInput" placeholder="Password" autocomplete="current-password" autofocus />
+          <button type="button" class="toggle-pw" id="togglePw" aria-label="Show password" title="Show password">
+            <svg class="eye-on" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+            <svg class="eye-off" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17.94 17.94A10.94 10.94 0 0 1 12 19c-7 0-11-7-11-7a19.8 19.8 0 0 1 4.22-5.06" />
+              <path d="M9.9 4.24A10.94 10.94 0 0 1 12 4c7 0 11 7 11 7a19.8 19.8 0 0 1-2.16 3.19" />
+              <path d="M14.12 14.12a3 3 0 1 1-4.24-4.24" />
+              <line x1="1" y1="1" x2="23" y2="23" />
+            </svg>
+          </button>
+        </div>
         <div class="login-error" id="loginError"></div>
         <button type="submit">Enter</button>
       </form>
@@ -230,6 +255,17 @@
       document.body.classList.remove("show-login");
       document.body.classList.add("show-chart");
     }
+
+    document.getElementById("togglePw").addEventListener("click", () => {
+      const input = document.getElementById("loginInput");
+      const btn = document.getElementById("togglePw");
+      const shown = input.type === "text";
+      input.type = shown ? "password" : "text";
+      btn.classList.toggle("shown", !shown);
+      btn.setAttribute("aria-label", shown ? "Show password" : "Hide password");
+      btn.setAttribute("title", shown ? "Show password" : "Hide password");
+      input.focus();
+    });
 
     document.getElementById("loginForm").addEventListener("submit", e => {
       e.preventDefault();
