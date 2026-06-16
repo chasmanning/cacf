@@ -18,16 +18,16 @@ Confirmed from `Governing Board/Committees/` on SharePoint unless noted.
 | Board Development Committee | BDC | `Committees/Board Development Committee/BDC 20XX` | Recruitment/nominations; "Open Call," "Candidate Slates." Dates not in current calendar — **TBD with liaison.** |
 | Community Advisory Committee | CAC | `Committees/Community Advisory Committee` | 2026: Feb 24 (w/ EC); May, Aug (retreat), Nov are **tentative** on the calendar. |
 | Local Impact Investing Committee | LIIC | `Committees/Local Impact Investing Committee` | 2026: May 13 confirmed; Aug, Nov tentative. |
-| Investment Committee | IC | **Confirm folder** | Appears on the calendar (Mar 6, Jun 4, Aug 13, Dec 3). Distinct from F&A and LIIC. **Confirm whether IC is its own standing committee/folder or a subcommittee of F&A.** |
+| Investment Committee | IC | `Committees/Investment Committee/YYYY` | **Confirmed** distinct standing committee (year-only subfolders, e.g. `2026`). 2026: Mar 6, Jun 4, Aug 13, Dec 3. |
 
 ### Tier 2 — Program, fund & scholarship committees
 These also deserve a standardized package; cadence and ownership **TBD with liaison.**
 
 | Body | Acronym | Evidence | Open question |
 |------|---------|----------|---------------|
-| BAMA Works Fund Grant Committee | "Bama GC" | Calendar: GC mtg Mar 27 & Oct 2 (tentative); site visits Feb/Mar/Aug/Sep; checks May 11, Nov 16. | Confirm full name, liaison, and the *site-visit → GC meeting → check-run* flow. |
-| (Grants/Programs) "MIB" | MIB | Calendar: MIB Mtg in Mar, Jun, Sep (month ranges). | **Acronym/owner unknown — confirm.** |
-| Scholarship committees | CSP, "All Scholarship Committee," + award committees (Allen, Bragg, Nelson, Buckingham/Fluvanna, Couric) | Calendar: CSP (Mar), All Scholarship (Apr), award events (Apr–May). | Confirm which are standing committees vs. one-time award panels; who liaises. |
+| "Bama" (grant committee?) | — | Calendar: GC mtg Mar 27 & Oct 2 (tentative); site visits Feb/Mar/Aug/Sep; checks May 11, Nov 16. | **No SharePoint folder named "Bama" found — confirm what this is, where its docs live, and the *site-visit → GC meeting → check-run* flow.** |
+| Mothers in Bloom | MIB | `Grantmaking Programs/Community Impact Advised Programs/Mothers in Bloom`. Calendar: MIB Mtg Mar, Jun, Sep. | A Community-Impact **advised grant program** (not a board committee). Confirm liaison & whether it wants the standardized package. |
+| Charlottesville Scholarship Program + scholarship panels | CSP | Calendar: CSP (Mar), All Scholarship (Apr), award events Apr–May (Allen, Bragg, Nelson, Buckingham/Fluvanna, Couric). | Confirm SharePoint home (not under "Scholarship") and which are standing committees vs. one-time award panels; who liaises. |
 
 ## Acronym legend (with confidence)
 | Acronym | Expansion | Confidence |
@@ -38,10 +38,10 @@ These also deserve a standardized package; cadence and ownership **TBD with liai
 | BDC | Board Development Committee | High (folder) |
 | CAC | Community Advisory Committee | High (folder) |
 | LIIC | Local Impact Investing Committee | High (folder) |
-| IC | Investment Committee | Medium — confirm it's distinct & where it files |
-| BAMA / "Bama GC" | BAMA Works Fund Grant Committee | Medium — confirm |
-| MIB | *unknown* | **Low — confirm** |
-| CSP | *College/Community Scholarship Program?* | **Low — confirm** |
+| IC | Investment Committee | **Confirmed** (own folder) |
+| MIB | Mothers in Bloom | **Confirmed** |
+| CSP | Charlottesville Scholarship Program | **Confirmed** |
+| "Bama" | *calendar category — identity to confirm* | **To confirm** (no folder by that name) |
 
 ## Dependency map (PROPOSED — validate with each liaison)
 

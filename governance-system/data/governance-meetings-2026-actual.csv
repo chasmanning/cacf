@@ -2,7 +2,7 @@ MeetingID,Committee,Abbr,MeetingDate,DayOfWeek,MeetingType,Status,Feeds,Notes
 1,Governing Board (Retreat),BOD,2026-02-13,Fri,Board,Done,,Board retreat
 2,Executive Committee,EC,2026-02-24,Tue,Committee,Done,Board 2026-03-24,Combined EC/CAC; agenda-set for Q1 board
 3,Community Advisory Committee,CAC,2026-02-24,Tue,Committee,Done,Board 2026-03-24,Combined with EC
-4,Investment Committee,IC,2026-03-06,Fri,Committee,Done,F&A 2026-03-17,Confirm IC home folder
+4,Investment Committee,IC,2026-03-06,Fri,Committee,Done,F&A 2026-03-17,Own folder: Committees/Investment Committee
 5,Finance & Audit Committee,F&A,2026-03-17,Tue,Committee,Done,Board 2026-03-24,Board-7cal; overlaps Deep Work Wk Mar 17-19
 6,Governing Board,BOD,2026-03-24,Tue,Board,Done,,Q1 board
 7,Local Impact Investing Committee,LIIC,2026-05-13,Wed,Committee,Done,Board,Confirm downstream/lead

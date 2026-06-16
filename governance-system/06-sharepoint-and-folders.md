@@ -29,9 +29,10 @@ Shared Documents/
         ├── Executive Committee/         → EC 2020 … EC 2026/
         ├── Board Development Committee/  → BDC 2021 … BDC 2026/
         ├── Community Advisory Committee/ → (E-Votes, …)
-        └── Local Impact Investing Committee/
-            ├── Meeting Minutes & Agendas/ → "2025-11-05 LIIC Meeting"/   ← ISO date prefix
-            └── Committee Recruitment and Governance/
+        ├── Local Impact Investing Committee/
+        │   ├── Meeting Minutes & Agendas/ → "2025-11-05 LIIC Meeting"/   ← ISO date prefix
+        │   └── Committee Recruitment and Governance/
+        └── Investment Committee/        → 2026/   ← year-only subfolders (confirm naming)
 ```
 
 ## B. Naming conventions (standardize going forward)
@@ -45,7 +46,7 @@ The site has **two competing patterns** — board uses `BOD MM.DD.YYYY` / `12.11
 | **Committee meeting folder** | **`YYYY-MM-DD <ABBR> Meeting`** | `2026-09-15 F&A Meeting` | ISO prefix **sorts chronologically** (LIIC already does this). |
 | Year container | `YYYY Documents` | `2026 Documents` | Matches existing. |
 
-Approved committee abbreviations: **F&A, EC, BDC, CAC, LIIC, IC** (confirm IC's home folder).
+Approved committee abbreviations: **F&A, EC, BDC, CAC, LIIC, IC**. Investment Committee files under `Committees/Investment Committee/YYYY` — note its **year-only** subfolders, unlike the `<ABBR> YYYY` pattern (decide whether to standardize).
 *Retire* the `MM.DD.YY` style used in `2025 Documents/12.11.25`.
 
 ## C. The folder template (the standardized package)

@@ -21,7 +21,7 @@ required lead time, and (c) their package contents — using the intake workshee
 | Liaison — Board Development | _____ | |
 | Liaison — Community Advisory | _____ | |
 | Liaison — Local Impact Investing | _____ | |
-| Liaison — Investment | _____ | confirm committee exists/home |
+| Liaison — Investment | _____ | confirmed standing committee (`Committees/Investment Committee`) |
 | Liaison(s) — Tier 2 (BAMA GC, MIB, scholarship) | _____ | opt-in |
 
 ## Per-committee intake workflow
@@ -72,8 +72,9 @@ Uses CACF's **already-scheduled** real cycles as natural pilots — no new dates
 ## Open items to close (carried from README)
 - [ ] Confirm lead-time defaults (`03`) / the F&A two-wave question.
 - [ ] Confirm/correct each **proposed** dependency in `02`.
-- [ ] Confirm Investment Committee's status & SharePoint home.
-- [ ] Resolve TBD acronyms/owners (MIB, CSP, BAMA cycle).
+- [x] Investment Committee confirmed as a standing committee (`Committees/Investment Committee/YYYY`).
+- [x] Acronyms resolved: MIB = Mothers in Bloom; CSP = Charlottesville Scholarship Program.
+- [ ] Confirm Tier-2 owners/liaisons and what "Bama" on the calendar refers to (no folder by that name).
 - [ ] Assign every role above; have each liaison complete the intake worksheet.
 - [ ] IT: Power Automate licensing + service account.
 - [ ] Run the cadence-setting working session → 2027 locked.

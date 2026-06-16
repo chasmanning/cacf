@@ -20,18 +20,18 @@ plus the WordPress board portal.
 
 | File | What it covers |
 |------|----------------|
-| `01-system-design.md` | The architecture: how SharePoint, Teams, Planner, Power Automate, Outlook, and the WordPress portal fit together; roles; design principles. |
-| `02-governance-map-and-dependencies.md` | The board + committees, an acronym legend, and the **dependency map** (which meeting feeds which). Dependencies are marked *evidenced* vs *proposed — to validate*. |
-| `03-meeting-lifecycle-playbook.md` | The standardized **package, prep, and follow-up** for any meeting: the T-minus timeline, prep invitations, the publish gate, and post-meeting actions. |
-| `04-cadence-2026.md` | The **actual, already-scheduled** 2026 governance meetings, plus worked prep dates for the remaining cycles (Jun 23, Sep 22, Dec 15) using the draft default timeline. |
-| `05-cadence-2027-worksheet.md` | A **blank collaborative planning worksheet** for 2027 — constraints and TBD slots, no assumed dates. |
-| `06-sharepoint-and-folders.md` | The exact folder map (matching your live `FoundationServer` site) and the naming convention, plus how folders get provisioned. |
-| `07-planner-task-board.md` | The Planner plan/bucket/label design and the standard task set generated for each meeting. |
-| `08-power-automate-flows.md` | Specs for the flows we automate now (hybrid): folder provisioning, reminders, follow-up. Includes the holiday/business-day approach. |
-| `09-teams-collaboration.md` | How to move prep collaboration into **Teams** (channels per committee) over the existing SharePoint library. |
-| `10-rollout-and-liaison-process.md` | The **collaborative build plan**: roles, the cadence-setting working session, and the per-committee intake workflow. Start here for "how do we actually stand this up." |
-| `templates/` | Ready-to-use agenda, consent-agenda cover, minutes, meeting-package checklist, email templates, and the **committee liaison intake worksheet**. |
-| `data/` | Machine-readable inputs: the master **Meetings list** schema, the actual 2026 meetings, the 2027 worksheet rows, and the **non-working-days** calendar that the automation references. |
+| [`01-system-design.md`](01-system-design.md) | The architecture: how SharePoint, Teams, Planner, Power Automate, Outlook, and the WordPress portal fit together; roles; design principles. |
+| [`02-governance-map-and-dependencies.md`](02-governance-map-and-dependencies.md) | The board + committees, an acronym legend, and the **dependency map** (which meeting feeds which). Dependencies are marked *evidenced* vs *proposed — to validate*. |
+| [`03-meeting-lifecycle-playbook.md`](03-meeting-lifecycle-playbook.md) | The standardized **package, prep, and follow-up** for any meeting: the T-minus timeline, prep invitations, the publish gate, and post-meeting actions. |
+| [`04-cadence-2026.md`](04-cadence-2026.md) | The **actual, already-scheduled** 2026 governance meetings, plus worked prep dates for the remaining cycles (Jun 23, Sep 22, Dec 15) using the draft default timeline. |
+| [`05-cadence-2027-worksheet.md`](05-cadence-2027-worksheet.md) | A **blank collaborative planning worksheet** for 2027 — constraints and TBD slots, no assumed dates. |
+| [`06-sharepoint-and-folders.md`](06-sharepoint-and-folders.md) | The exact folder map (matching your live `FoundationServer` site) and the naming convention, plus how folders get provisioned. |
+| [`07-planner-task-board.md`](07-planner-task-board.md) | The Planner plan/bucket/label design and the standard task set generated for each meeting. |
+| [`08-power-automate-flows.md`](08-power-automate-flows.md) | Specs for the flows we automate now (hybrid): folder provisioning, reminders, follow-up. Includes the holiday/business-day approach. |
+| [`09-teams-collaboration.md`](09-teams-collaboration.md) | How to move prep collaboration into **Teams** (channels per committee) over the existing SharePoint library. |
+| [`10-rollout-and-liaison-process.md`](10-rollout-and-liaison-process.md) | The **collaborative build plan**: roles, the cadence-setting working session, and the per-committee intake workflow. Start here for "how do we actually stand this up." |
+| [`templates/`](templates) | Ready-to-use agenda, consent-agenda cover, minutes, meeting-package checklist, email templates, and the **committee liaison intake worksheet**. |
+| [`data/`](data) | Machine-readable inputs: the master **Meetings list** schema, the actual 2026 meetings, the 2027 worksheet rows, and the **non-working-days** calendar that the automation references. |
 
 ## The one-paragraph version
 
@@ -51,5 +51,5 @@ worksheet — the system just executes them reliably.
 - Confirm whether the observed **F&A = Board − 7 calendar days** pattern is intentional policy.
 - Confirm the **dependency links** marked *proposed* in `02`.
 - Identify the **liaison** for each committee and have them complete the intake worksheet.
-- Confirm acronyms/owners flagged **TBD** (e.g., "MIB," scholarship committees, BAMA Works cycle).
+- Confirm Tier-2 owners (Mothers in Bloom = MIB, Charlottesville Scholarship Program = CSP) and what "Bama" on the calendar refers to (no SharePoint folder by that name).
 - Decide Power Automate licensing/service-account details with IT (`08`).
